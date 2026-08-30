@@ -1,14 +1,14 @@
 Documento de Especificação de Requisitos
 
-Projeto: Tecnologia social com foco na geração de renda para coletores de frutos nativos da Caatinga e produtores de seus derivados.
+    Projeto: Tecnologia social com foco na geração de renda para coletores de frutos nativos da Caatinga e produtores de seus derivados.
 
-Data de criação:
+    Data de criação:
 
-Autor: Aurora Rodrigues Maciel
+    Autor: Aurora Rodrigues Maciel
 
-Cargo:
+    Cargo:
 
-Revisão: 01
+    Revisão: 01
 
 
 
