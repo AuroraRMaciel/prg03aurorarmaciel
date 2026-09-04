@@ -5,6 +5,7 @@
 package br.com.ifba.usuario.view;
 import javax.swing.JOptionPane;
 import br.com.ifba.login.view.TelaLogin;
+import br.com.ifba.usuario.validar.ValidadorCadastro;
 
 /**
  *
@@ -219,7 +220,16 @@ public class TelaCadastro extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "As senhas não são iguais.", "Erro de Validação", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
         else{
-            javax.swing.JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!", "Sucesso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            //Chama o validador cadastro
+            boolean resultado = ValidadorCadastro.contemPalavraProibida(login);
+            //Se a palavra usada para login não for proibida
+            if (resultado == false){
+                javax.swing.JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!", "Sucesso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+            //Se a palavra for proibida
+            else{
+                javax.swing.JOptionPane.showMessageDialog(this, "Login contém palavra não permitida", "Erro no cadastro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
