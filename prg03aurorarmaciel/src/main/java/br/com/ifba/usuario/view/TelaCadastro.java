@@ -225,9 +225,10 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        //
+        //Abre a tela de login ao selecionar cancelar
         TelaLogin telaLogin = new TelaLogin();
         telaLogin.setVisible(true);
+        //Fecha a tela de cadatrar usuário
         setVisible(false);
         
     }//GEN-LAST:event_btnCancelarActionPerformed
