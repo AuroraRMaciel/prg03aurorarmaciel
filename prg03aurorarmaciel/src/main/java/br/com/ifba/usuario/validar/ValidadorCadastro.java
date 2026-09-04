@@ -8,7 +8,7 @@ package br.com.ifba.usuario.validar;
  *
  * @author auror
  */
-public class ValidarUsuario {
+public class ValidadorCadastro {
     public static boolean contemPalavraProibida(String texto){
         //Cria o array de string com palavras proibidas
         String palavrasProibidas[] = {"admin", "teste", "root", "senha123"};

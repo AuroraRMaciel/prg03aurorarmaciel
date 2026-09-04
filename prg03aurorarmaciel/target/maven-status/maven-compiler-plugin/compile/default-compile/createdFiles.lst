@@ -1,4 +1,5 @@
 br\com\ifba\login\view\TelaLogin.class
 br\com\ifba\usuario\view\TelaCadastro.class
 br\com\ifba\prg03aurorarmaciel\Prg03aurorarmaciel.class
+br\com\ifba\usuario\validar\ValidadorCadastro.class
 br\com\ifba\login\view\TelaLogin$1.class
