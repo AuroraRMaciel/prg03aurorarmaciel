@@ -4,6 +4,7 @@
  */
 package br.com.ifba.login.view;
 import br.com.ifba.usuario.view.TelaCadastro;
+import br.com.ifba.usuario.entity.Usuario;
 /**
  *
  * @author auror
@@ -155,14 +156,17 @@ public class TelaLogin extends javax.swing.JFrame {
 //Método chamado ao clicar no botão Entrar
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
-        //1. Captura o que foi digitado nos campos
-        String loginDigitado = txtLogin.getText();
-        String senhaDigitada = new String(pfSenha.getPassword());
+        //Cria o objeto da classe Usuario
+        Usuario usuario = new Usuario();
         
-        //2. Usa as variáveis para preencher o TextArea
+        //1. Captura o que foi digitado nos campos
+        usuario.login = txtLogin.getText();
+        usuario.senha = new String(pfSenha.getPassword());
+        
+        //2. Usa os atributos do objeto usuario para preencher o TextArea
         taResultado.setText(
-                    "Login digitado: " + loginDigitado + "\n" +
-                    "Senha digitada: " + senhaDigitada);
+                    "Login digitado: " + usuario.login + "\n" +
+                    "Senha digitada: " + usuario.senha);
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void lblCadastreseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCadastreseMouseClicked

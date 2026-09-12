@@ -6,6 +6,7 @@ package br.com.ifba.usuario.view;
 import javax.swing.JOptionPane;
 import br.com.ifba.login.view.TelaLogin;
 import br.com.ifba.usuario.validar.ValidadorCadastro;
+import br.com.ifba.usuario.entity.Usuario;
 
 /**
  *
@@ -198,30 +199,33 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
+        //Cria um objeto da classe Usuario
+        Usuario usuario = new Usuario();
+        
         //Pega todos os campos e apaga os espaços no inicio e final da string
-        String nome = txtNome.getText().trim();
-        String cpf = txtCpf.getText().trim();
-        String genero = txtGenero.getText().trim();
-        String dataNascimento = txtDataNascimento.getText().trim();
-        String telefone = txtTelefone.getText().trim();
-        String email = txtEmail.getText().trim();
-        String login = txtLogin.getText().trim();
-        String senha = new String(pfSenha.getPassword());
+        usuario.nome = txtNome.getText().trim();
+        usuario.cpf = txtCpf.getText().trim();
+        usuario.genero = txtGenero.getText().trim();
+        usuario.dataNascimento = txtDataNascimento.getText().trim();
+        usuario.telefone = txtTelefone.getText().trim();
+        usuario.email = txtEmail.getText().trim();
+        usuario.login = txtLogin.getText().trim();
+        usuario.senha = new String(pfSenha.getPassword());
         String confirmarSenha = new String(pfConfirmarSenha.getPassword());
         
         //Validação
         //Verificar se algum campo está vazio
-        if (nome.isEmpty() || cpf.isEmpty() || genero.isEmpty() || dataNascimento.isEmpty() || 
-            telefone.isEmpty() || email.isEmpty() || login.isEmpty() || senha.isEmpty() || confirmarSenha.isEmpty()){
+        if (usuario.nome.isEmpty() || usuario.cpf.isEmpty() || usuario.genero.isEmpty() || usuario.dataNascimento.isEmpty() || 
+            usuario.telefone.isEmpty() || usuario.email.isEmpty() || usuario.login.isEmpty() || usuario.senha.isEmpty() || confirmarSenha.isEmpty()){
             javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos.", "Erro de Validação", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
         //Verificar se as senhas são diferentes
-        else if (senha.equals(confirmarSenha) == false){
+        else if (usuario.senha.equals(confirmarSenha) == false){
             javax.swing.JOptionPane.showMessageDialog(this, "As senhas não são iguais.", "Erro de Validação", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
         else{
             //Chama o validador cadastro
-            boolean resultado = ValidadorCadastro.contemPalavraProibida(login);
+            boolean resultado = ValidadorCadastro.contemPalavraProibida(usuario.login);
             //Se a palavra usada para login não for proibida
             if (resultado == false){
                 javax.swing.JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!", "Sucesso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
