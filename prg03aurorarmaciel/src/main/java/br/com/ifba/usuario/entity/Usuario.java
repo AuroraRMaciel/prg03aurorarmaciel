@@ -20,6 +20,16 @@ public class Usuario {
     private String senha;
     
     //Métodos
+    public Usuario(){
+        
+    }
+    public Usuario(String nome, String cpf, String login, String senha){
+        this.nome = nome;
+        this.cpf = cpf;
+        this.login = login;
+        this.senha = senha;
+    }
+    
     public String getNome(){
         return nome;
     }
