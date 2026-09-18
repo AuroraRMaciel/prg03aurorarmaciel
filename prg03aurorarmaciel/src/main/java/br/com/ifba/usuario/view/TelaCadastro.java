@@ -228,9 +228,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             boolean resultado = ValidadorCadastro.contemPalavraProibida(usuario.getLogin());
             //Se a palavra usada para login não for proibida
             if (resultado == false){
-                //Cria um novo objeto da classe usuario passando para seu construtor os dados digitados
-                Usuario usuario1 = new Usuario(usuario.getNome(), usuario.getCpf(), usuario.getLogin(), usuario.getSenha());
-                javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuario1.getNome() + "\nCpf: " + usuario1.getCpf() + "\nLogin: " + usuario1.getLogin() + "\nSenha: " + usuario1.getSenha(), "Cadastro realizado com sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuario.getNome() + "\nCpf: " + usuario.getCpf() + "\nLogin: " + usuario.getLogin() + "\nSenha: " + usuario.getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }
             //Se a palavra for proibida
             else{
