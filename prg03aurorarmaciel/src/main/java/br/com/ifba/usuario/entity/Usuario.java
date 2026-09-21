@@ -88,6 +88,10 @@ public class Usuario implements Autenticavel{
         this.senha = senha;
     }
     
+    /*private boolean senhaValida(String senha){
+        return this.senha.equals(senha);
+    }*/
+    
     @Override
     public boolean autenticar(String login, String senha){
         if (this.login.equals(login) == true && this.senha.equals(senha) == true){
@@ -96,5 +100,6 @@ public class Usuario implements Autenticavel{
         else{
             return false;
         }
+        //return this.login.equals(login) && senhaValida(senha);
     }
 }
