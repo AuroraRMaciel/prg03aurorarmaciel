@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import br.com.ifba.login.view.TelaLogin;
 import br.com.ifba.usuario.validar.ValidadorCadastro;
 import br.com.ifba.usuario.entity.Usuario;
+import br.com.ifba.usuario.validar.ValidadorUsuario;
 
 /**
  *
@@ -213,28 +214,39 @@ public class TelaCadastro extends javax.swing.JFrame {
         usuario.setSenha(new String(pfSenha.getPassword()));
         String confirmarSenha = new String(pfConfirmarSenha.getPassword());
         
-        //Validação
-        //Verificar se algum campo está vazio
-        if (usuario.getNome().isEmpty() || usuario.getCpf().isEmpty() || usuario.getGenero().isEmpty() || usuario.getDataNascimento().isEmpty() || 
-            usuario.getTelefone().isEmpty() || usuario.getEmail().isEmpty() || usuario.getLogin().isEmpty() || usuario.getSenha().isEmpty() || confirmarSenha.isEmpty()){
+        //Chamada das funções
+        boolean camposPreenchidos = ValidadorUsuario.camposPreenchidos(usuario, confirmarSenha);
+        boolean senhasIguais = ValidadorUsuario.senhasIguais(usuario, confirmarSenha);
+        boolean resultado = ValidadorCadastro.contemPalavraProibida(usuario.getLogin());
+        boolean cpfValido = ValidadorUsuario.cpfValido(usuario.getCpf());
+        boolean senhaForte = ValidadorUsuario.senhaForte(usuario.getSenha());
+        
+        //Verifica se todos os campos estão preenchidos
+        if (camposPreenchidos == false){
             javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos.", "Erro de Validação", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
-        //Verificar se as senhas são diferentes
-        else if (usuario.getSenha().equals(confirmarSenha) == false){
+        //Verifica se as senhas são diferentes
+        else if (senhasIguais == false){
             javax.swing.JOptionPane.showMessageDialog(this, "As senhas não são iguais.", "Erro de Validação", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
-        else{
-            //Chama o validador cadastro
-            boolean resultado = ValidadorCadastro.contemPalavraProibida(usuario.getLogin());
-            //Se a palavra usada para login não for proibida
-            if (resultado == false){
-                javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuario.getNome() + "\nCpf: " + usuario.getCpf() + "\nLogin: " + usuario.getLogin() + "\nSenha: " + usuario.getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            }
-            //Se a palavra for proibida
-            else{
-                javax.swing.JOptionPane.showMessageDialog(this, "Login contém palavra não permitida", "Erro no cadastro", javax.swing.JOptionPane.ERROR_MESSAGE);
-            }
+        //Verifica se o cpf é válido
+        else if (cpfValido == false){
+            javax.swing.JOptionPane.showMessageDialog(this, "O cpf é inválido", "Erro de validação", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+        //Verifica se a senha é forte
+        else if (senhaForte == false){
+            javax.swing.JOptionPane.showMessageDialog(this, "A senha " + usuario.getSenha() + " não é forte!", "Senha fraca", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+        //Verifica se o login contém palavra proibida
+        //Se a palavra usada para login não for proibida
+        else if (resultado == false){
+            javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuario.getNome() + "\nCpf: " + usuario.getCpf() + "\nLogin: " + usuario.getLogin() + "\nSenha: " + usuario.getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+        //Se a palavra for proibida
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Login contém palavra não permitida", "Erro no cadastro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
