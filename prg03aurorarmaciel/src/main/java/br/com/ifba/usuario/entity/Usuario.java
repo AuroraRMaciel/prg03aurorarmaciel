@@ -7,6 +7,7 @@ import br.com.ifba.usuario.interfaces.Autenticavel;
 import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.perfil.entity.Perfil;
 import br.com.ifba.status.model.Status;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class Usuario implements Autenticavel{
     private String email;
     private String login;
     private String senha;
+    private LocalDateTime criadoEm;
+    private LocalDateTime ultimoLogin;
     
     //Métodos
     public Usuario(){
@@ -37,6 +40,7 @@ public class Usuario implements Autenticavel{
         this.senha = senha;
         this.perfis = new ArrayList<>();
         this.status = Status.INATIVO;
+        this.criadoEm = LocalDateTime.now();
     }
 
     public Pessoa getPessoa(){
@@ -102,6 +106,19 @@ public class Usuario implements Autenticavel{
         this.senha = senha;
     }
     
+    public LocalDateTime getCriadoEm(){
+        return criadoEm;
+    }
+    public void setCriadoEm(LocalDateTime criadoEm){
+        this.criadoEm = criadoEm;
+    }
+    
+    public LocalDateTime getUltimoLogin(){
+        return ultimoLogin;
+    }
+    public void setUltimoLogin(LocalDateTime ultimoLogin){
+        this.ultimoLogin = ultimoLogin;
+    }
     /*private boolean senhaValida(String senha){
         return this.senha.equals(senha);
     }*/
