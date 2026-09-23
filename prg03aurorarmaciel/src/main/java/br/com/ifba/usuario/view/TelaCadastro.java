@@ -217,6 +217,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         usuario.setSenha(new String(pfSenha.getPassword()));
         String confirmarSenha = new String(pfConfirmarSenha.getPassword());
         
+        usuario.setNomeUsuario(usuario.getPessoa().getNomeCompleto().split("\\s+")[0]);
+        System.out.println(usuario.getNomeUsuario());
+        
         //Chamada das funções
         boolean camposPreenchidos = ValidadorUsuario.camposPreenchidos(usuario, confirmarSenha);
         boolean senhasIguais = ValidadorUsuario.senhasIguais(usuario, confirmarSenha);
@@ -243,8 +246,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         //Verifica se o login contém palavra proibida
         //Se a palavra usada para login não for proibida
         else if (resultado == false){
-            javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuario.getNomeUsuario() + "\nCpf: " + usuario.getPessoa().getCpf() + "\nLogin: " + usuario.getLogin() + 
-                    "\nSenha: " + usuario.getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuario.getPessoa().getNomeCompleto() + "\nCpf: " + usuario.getPessoa().getCpf() + "\nLogin: " + usuario.getLogin() + "\nSenha: " + usuario.getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
         //Se a palavra for proibida
         else{
