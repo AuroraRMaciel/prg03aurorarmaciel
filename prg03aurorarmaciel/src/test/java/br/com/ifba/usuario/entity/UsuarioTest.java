@@ -180,4 +180,21 @@ public class UsuarioTest {
         //Assert
         assertFalse(resultado);
     }
+    
+    @Test
+    public void aoAdicionarPerfilAlistaCresce(){
+        //Arrange
+        Pessoa pessoa = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "Feminino");
+        Usuario usuario = new Usuario(pessoa, "aurora", "Senha123@");
+        Perfil perfil = new Perfil("Cliente", "Possível comprador dos produtos");
+        
+        //Act
+        int tamanhoListaOriginal = usuario.getPerfis().size();
+        usuario.adicionarPerfilALista(perfil);
+        int tamanhoListaAtualizado = usuario.getPerfis().size();
+        boolean resultado = tamanhoListaAtualizado > tamanhoListaOriginal;
+        
+        //Assert
+        assertTrue(resultado);
+    }
 }
