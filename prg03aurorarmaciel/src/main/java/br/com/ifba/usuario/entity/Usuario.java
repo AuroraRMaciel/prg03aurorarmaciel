@@ -4,6 +4,11 @@
  */
 package br.com.ifba.usuario.entity;
 import br.com.ifba.usuario.interfaces.Autenticavel;
+import br.com.ifba.pessoa.entity.Pessoa;
+import br.com.ifba.perfil.entity.Perfil;
+import br.com.ifba.status.model.Status;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -11,10 +16,12 @@ import br.com.ifba.usuario.interfaces.Autenticavel;
  */
 public class Usuario implements Autenticavel{
     //Atributos
-    private String nome;
-    private String cpf;
-    private String genero;
-    private String dataNascimento;
+    private Pessoa pessoa;
+    private List<Perfil> perfis;
+    private Perfil perfilAtivo;
+    private Status status;
+    
+    private String nomeUsuario;
     private String telefone;
     private String email;
     private String login;
@@ -24,40 +31,47 @@ public class Usuario implements Autenticavel{
     public Usuario(){
         
     }
-    public Usuario(String nome, String cpf, String login, String senha){
-        this.nome = nome;
-        this.cpf = cpf;
+    public Usuario(Pessoa pessoa, String login, String senha){
+        this.pessoa = pessoa;
         this.login = login;
         this.senha = senha;
-    }
-    
-    public String getNome(){
-        return nome;
-    }
-    public void setNome(String nome){
-        this.nome = nome;
+        this.perfis = new ArrayList<>();
+        this.status = Status.INATIVO;
     }
 
-    public String getCpf() {
-        return cpf;
+    public Pessoa getPessoa(){
+        return pessoa;
     }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-    
-    public String getGenero(){
-        return genero;
-    }
-    public void setGenero(String genero){
-        this.genero = genero;
+    public void setPessoa(Pessoa pessoa){
+        this.pessoa = pessoa;
     }
     
-    public String getDataNascimento(){
-        return dataNascimento;
+    public List<Perfil> getPerfis(){
+        return perfis;
     }
-    public void setDataNascimento(String dataNascimento){
-        this.dataNascimento = dataNascimento;
+    public void setPerfis(List<Perfil> perfis){
+        this.perfis = perfis;
+    }
+    
+    public Perfil getPerfilAtivo(){
+        return perfilAtivo;
+    }
+    public void setPerfilAtivo(Perfil perfilAtivo){
+        this.perfilAtivo = perfilAtivo;
+    }
+    
+    public Status getStatus(){
+        return status;
+    }
+    public void setStatus(Status status){
+        this.status = status;
+    }
+    
+    public String getNomeUsuario(){
+        return nomeUsuario;
+    }
+    public void setNomeUsuario(String nomeUsuario){
+        this.nomeUsuario = nomeUsuario;
     }
     
     public String getTelefone(){
@@ -94,7 +108,7 @@ public class Usuario implements Autenticavel{
     
     @Override
     public boolean autenticar(String login, String senha){
-        if (this.login.equals(login) == true && this.senha.equals(senha) == true){
+        if (this.login.equals(login) && this.senha.equals(senha)){
             return true;
         }
         else{
