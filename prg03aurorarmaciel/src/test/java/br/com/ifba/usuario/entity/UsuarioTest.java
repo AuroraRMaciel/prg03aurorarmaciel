@@ -5,6 +5,7 @@
 package br.com.ifba.usuario.entity;
 import br.com.ifba.perfil.entity.Perfil;
 import br.com.ifba.pessoa.entity.Pessoa;
+import br.com.ifba.status.model.Status;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -196,5 +197,45 @@ public class UsuarioTest {
         
         //Assert
         assertTrue(resultado);
+    }
+    
+    @Test
+    public void objetoCriadoNasceComStatusCorreto(){
+        //Arrange
+        Pessoa pessoa = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "Feminino");
+        Usuario usuario = new Usuario(pessoa, "aurora", "Senha123@");
+        Status status = Status.INATIVO;
+        
+        //Act
+        boolean resultado = usuario.getStatus() == status;
+        
+        //Assert
+        assertTrue(resultado);
+    }
+    
+    @Test
+    public void objetoNasceComStatusCorreto(){
+        //Arrange
+        Pessoa pessoa = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "Feminino");
+        Usuario usuario = new Usuario(pessoa, "aurora", "Senha123@");
+        Status status = Status.INATIVO;
+        
+        //Assert
+        assertEquals(usuario.getStatus(), status);
+    }
+    
+    @Test
+    public void oObjetoRelacionadoEdevolvidoPeloGetter(){
+       //Arrange
+       Pessoa pessoa = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "Feminino");
+       Usuario usuario = new Usuario(pessoa, "aurora", "Senha123@");
+       
+       //Act
+       Pessoa pessoa2 = usuario.getPessoa();
+       
+       //Assert
+       assertEquals(pessoa, pessoa2);
+       
+         
     }
 }
