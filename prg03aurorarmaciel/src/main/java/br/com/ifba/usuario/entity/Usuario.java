@@ -133,4 +133,8 @@ public class Usuario implements Autenticavel{
         }
         //return this.login.equals(login) && senhaValida(senha);
     }
+    
+    public void adicionarPerfilALista(Perfil perfil){
+        this.perfis.add(perfil);
+    }
 }

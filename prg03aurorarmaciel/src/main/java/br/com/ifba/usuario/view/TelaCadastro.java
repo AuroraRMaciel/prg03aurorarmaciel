@@ -218,7 +218,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         String confirmarSenha = new String(pfConfirmarSenha.getPassword());
         
         usuario.setNomeUsuario(usuario.getPessoa().getNomeCompleto().split("\\s+")[0]);
-        System.out.println(usuario.getNomeUsuario());
         
         //Chamada das funções
         boolean camposPreenchidos = ValidadorUsuario.camposPreenchidos(usuario, confirmarSenha);
