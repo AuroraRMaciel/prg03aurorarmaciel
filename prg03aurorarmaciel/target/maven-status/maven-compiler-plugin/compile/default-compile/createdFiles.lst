@@ -1,4 +1,5 @@
 br\com\ifba\usuario\validar\ValidadorUsuario.class
+br\com\ifba\status\model\Status.class
 br\com\ifba\usuario\interfaces\Autenticavel.class
 br\com\ifba\usuario\view\TelaCadastro.class
 br\com\ifba\prg03aurorarmaciel\Prg03aurorarmaciel.class
@@ -6,3 +7,5 @@ br\com\ifba\usuario\validar\ValidadorCadastro.class
 br\com\ifba\login\view\TelaLogin$1.class
 br\com\ifba\login\view\TelaLogin.class
 br\com\ifba\usuario\entity\Usuario.class
+br\com\ifba\perfil\entity\Perfil.class
+br\com\ifba\pessoa\entity\Pessoa.class

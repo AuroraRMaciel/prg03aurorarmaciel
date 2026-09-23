@@ -5,6 +5,7 @@
 package br.com.ifba.usuario.view;
 import javax.swing.JOptionPane;
 import br.com.ifba.login.view.TelaLogin;
+import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.usuario.validar.ValidadorCadastro;
 import br.com.ifba.usuario.entity.Usuario;
 import br.com.ifba.usuario.validar.ValidadorUsuario;
@@ -202,12 +203,14 @@ public class TelaCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Cria um objeto da classe Usuario
         Usuario usuario = new Usuario();
+        Pessoa pessoa = new Pessoa();
         
         //Pega todos os campos e apaga os espaços no inicio e final da string
-        usuario.setNome(txtNome.getText().trim());
-        usuario.setCpf(txtCpf.getText().trim());
-        usuario.setGenero(txtGenero.getText().trim());
-        usuario.setDataNascimento(txtDataNascimento.getText().trim());
+        pessoa.setNomeCompleto(txtNome.getText().trim());
+        pessoa.setCpf(txtCpf.getText().trim());
+        pessoa.setGenero(txtGenero.getText().trim());
+        pessoa.setDataNascimento(txtDataNascimento.getText().trim());
+        usuario.setPessoa(pessoa);
         usuario.setTelefone(txtTelefone.getText().trim());
         usuario.setEmail(txtEmail.getText().trim());
         usuario.setLogin(txtLogin.getText().trim());
@@ -218,7 +221,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         boolean camposPreenchidos = ValidadorUsuario.camposPreenchidos(usuario, confirmarSenha);
         boolean senhasIguais = ValidadorUsuario.senhasIguais(usuario, confirmarSenha);
         boolean resultado = ValidadorCadastro.contemPalavraProibida(usuario.getLogin());
-        boolean cpfValido = ValidadorUsuario.cpfValido(usuario.getCpf());
+        boolean cpfValido = ValidadorUsuario.cpfValido(usuario.getPessoa().getCpf());
         boolean senhaForte = ValidadorUsuario.senhaForte(usuario.getSenha());
         
         //Verifica se todos os campos estão preenchidos
@@ -240,7 +243,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         //Verifica se o login contém palavra proibida
         //Se a palavra usada para login não for proibida
         else if (resultado == false){
-            javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuario.getNome() + "\nCpf: " + usuario.getCpf() + "\nLogin: " + usuario.getLogin() + "\nSenha: " + usuario.getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuario.getNomeUsuario() + "\nCpf: " + usuario.getPessoa().getCpf() + "\nLogin: " + usuario.getLogin() + 
+                    "\nSenha: " + usuario.getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
         //Se a palavra for proibida
         else{

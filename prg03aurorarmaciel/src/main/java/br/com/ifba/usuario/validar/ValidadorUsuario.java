@@ -14,8 +14,8 @@ import java.util.regex.Matcher;
 public class ValidadorUsuario {
     //Verifica se os campos estão preenchidos
     public static boolean camposPreenchidos(Usuario usuario, String confirmarSenha){
-        if (usuario.getNome().isEmpty() || usuario.getCpf().isEmpty() || usuario.getGenero().isEmpty() || 
-                usuario.getDataNascimento().isEmpty() || usuario.getTelefone().isEmpty() || usuario.getEmail().isEmpty() || 
+        if (usuario.getNomeUsuario().isEmpty() || usuario.getPessoa().getCpf().isEmpty() || usuario.getPessoa().getGenero().isEmpty() || 
+                usuario.getPessoa().getDataNascimento().isEmpty() || usuario.getTelefone().isEmpty() || usuario.getEmail().isEmpty() || 
                 usuario.getLogin().isEmpty() || usuario.getSenha().isEmpty() || confirmarSenha.isEmpty()){
             return false;
         }
