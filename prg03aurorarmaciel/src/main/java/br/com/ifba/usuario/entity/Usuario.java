@@ -29,6 +29,7 @@ public class Usuario implements Autenticavel{
     private String senha;
     private LocalDateTime criadoEm;
     private LocalDateTime ultimoLogin;
+    private String endereco;
     
     //Métodos
     public Usuario(){
@@ -119,6 +120,15 @@ public class Usuario implements Autenticavel{
     public void setUltimoLogin(LocalDateTime ultimoLogin){
         this.ultimoLogin = ultimoLogin;
     }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+    
     /*private boolean senhaValida(String senha){
         return this.senha.equals(senha);
     }*/

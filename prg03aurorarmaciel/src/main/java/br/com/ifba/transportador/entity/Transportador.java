@@ -72,4 +72,22 @@ public class Transportador extends Perfil{
     public void setAvaliacao(double avaliacao) {
         this.avaliacao = avaliacao;
     }
+    
+    @Override
+    public boolean validarDados(){
+        //Se os dados da super classe nao estiver validos
+        if (!super.validarDados()){
+            return false;
+        }
+        
+        //Se cnh for nula ou vazia 
+        if (this.cnh == null || this.cnh.trim().isEmpty()){
+            return false;
+        }
+        //Se a area de atuacao for nula ou vazia
+        if (this.areaAtuacao == null || this.areaAtuacao.isEmpty()){
+            return false;
+        }
+        return true;
+    }
 }
