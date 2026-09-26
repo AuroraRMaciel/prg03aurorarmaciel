@@ -4,6 +4,8 @@
  */
 package br.com.ifba.perfil.entity;
 
+import br.com.ifba.status.model.StatusCadastro;
+
 /**
  *
  * @author auror
@@ -13,6 +15,7 @@ public class Perfil {
     private String descricao;
     private boolean imutavel;
     private String imagemUrl;
+    private StatusCadastro statusCadastro;
     
     public Perfil(){
         
@@ -49,4 +52,29 @@ public class Perfil {
     public void setImagemUrl(String imagemUrl){
         this.imagemUrl = imagemUrl;
     }
+
+    public StatusCadastro getStatusCadastro() {
+        return statusCadastro;
+    }
+
+    public void setStatusCadastro(StatusCadastro statusCadastro) {
+        this.statusCadastro = statusCadastro;
+    }
+    
+    public void aprovarCadastro(){
+        this.statusCadastro = StatusCadastro.APROVADO;
+    }
+    
+    public boolean validarDados(){
+      //Nome nulo ou vazio
+      if (this.nome == null || this.nome.trim().isEmpty()){
+          return false;
+      } 
+      //Se status nulo
+      if (this.statusCadastro == null){
+          return false;
+      }
+      return true;
+    }
+    
 }
