@@ -4,6 +4,7 @@
  */
 package br.com.ifba.produto.entity;
 
+import br.com.ifba.tipo.model.TipoProduto;
 import br.com.ifba.unidade.model.UnidadeMedida;
 import br.com.ifba.usuario.entity.Usuario;
 
@@ -13,6 +14,7 @@ import br.com.ifba.usuario.entity.Usuario;
  */
 public class Produto {
     private String nome;
+    private TipoProduto categoria;
     private UnidadeMedida unidadeMedida;
     private double quantidadeDisponivel;
     private Usuario vendedor;
@@ -34,6 +36,14 @@ public class Produto {
     }
     public void setNome(String nome){
         this.nome = nome;
+    }
+    
+     public TipoProduto getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(TipoProduto categoria) {
+        this.categoria = categoria;
     }
     
     public UnidadeMedida getUnidadeMedida(){

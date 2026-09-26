@@ -9,5 +9,5 @@ package br.com.ifba.unidade.model;
  * @author auror
  */
 public enum UnidadeMedida {
-    
+    UNIDADE, QUILO, CENTRO, CAIXA;
 }

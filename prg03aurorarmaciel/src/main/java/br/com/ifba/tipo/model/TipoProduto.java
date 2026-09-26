@@ -9,5 +9,5 @@ package br.com.ifba.tipo.model;
  * @author auror
  */
 public enum TipoProduto {
-    
+    FRUTOS, DERIVADOS;
 }
