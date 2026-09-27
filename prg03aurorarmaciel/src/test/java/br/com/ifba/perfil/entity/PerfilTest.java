@@ -4,6 +4,7 @@
  */
 package br.com.ifba.perfil.entity;
 
+import br.com.ifba.cliente.entity.Cliente;
 import br.com.ifba.coletor.entity.Coletor;
 import br.com.ifba.organizacao.entity.Organizacao;
 import br.com.ifba.status.model.StatusCadastro;
@@ -35,6 +36,18 @@ public class PerfilTest {
     }
     
     @Test
+    public void deveReprovarCadastroComSucesso(){
+        //Arrange
+        Coletor coletor = new Coletor();
+        
+        //Act
+        coletor.reprovarCadastro();
+        
+        //Assert
+        assertEquals(StatusCadastro.REPROVADO, coletor.getStatusCadastro());
+    }
+    
+    @Test
     public void deveAutenticarQuandoOsDadosSaoValidos(){
         //Arrange
         Organizacao associacao = new Organizacao(TipoOrganizacao.ASSOCIACAO, "01234567890", "EcoCaatinga Social");
@@ -59,6 +72,41 @@ public class PerfilTest {
         
         //Assert
         assertFalse(resultado);
+    }
+    
+    @Test
+    public void oCadastroDeveEstarAprovado(){
+        //Arrange
+        Coletor perfil = new Coletor();
+        perfil.aprovarCadastro();
+        
+        //Act
+        boolean resultado = perfil.isAprovado();
+        
+        //Assert
+        assertTrue(resultado);
+    }
+    
+    @Test
+    public void oCadastroDeveEstarReprovado(){
+       //Arrange
+       Cliente perfil = new Cliente();
+       perfil.reprovarCadastro();
+       
+       //Act
+       boolean resultado = perfil.isAprovado();
+       
+       //Assert
+       assertFalse(resultado);
+    }
+    
+    @Test
+    public void deveRetornarPerfilGenerico(){
+        //Arrange
+        Perfil perfil = new Perfil();
+        
+        //Assert
+        assertEquals(perfil.getTipoPerfil(), "Perfil genérico");
     }
     
     //Testa método subscrito
