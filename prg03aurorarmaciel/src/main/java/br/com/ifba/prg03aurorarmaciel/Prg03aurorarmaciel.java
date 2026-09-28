@@ -10,12 +10,17 @@ import br.com.ifba.perfil.entity.Perfil;
 import br.com.ifba.produtor.entity.ProdutorDerivados;
 import br.com.ifba.transportador.entity.Transportador;
 import br.com.ifba.usuario.entity.Usuario;
+import br.com.ifba.usuario.interfaces.Autenticavel;
 
 /**
  *
  * @author auror
  */
 public class Prg03aurorarmaciel {
+    //Task 03
+    public static boolean processar(Autenticavel pessoa, String login, String senha){
+       return pessoa.autenticar(login, senha);
+    }
 
     public static void main(String[] args) {
         //Task 02
@@ -48,6 +53,16 @@ public class Prg03aurorarmaciel {
         System.out.println(coleta.getTipoPerfil());
         System.out.println(producao.getTipoPerfil());
         System.out.println(transporte.getTipoPerfil());
-        System.out.println(compra.getTipoPerfil());
+        System.out.println(compra.getTipoPerfil() + "\n");
+        
+        //Task 03
+        Autenticavel usuario = new Usuario("Aurora", "senha123");
+        Autenticavel cliente1 = new Cliente();
+        
+        boolean resultado1 = processar(usuario, "aurora", "senha");
+        boolean resultado2 = processar(cliente1, "aurora", "senha");
+        
+        System.out.println(resultado1);
+        System.out.println(resultado2);
     }
 }

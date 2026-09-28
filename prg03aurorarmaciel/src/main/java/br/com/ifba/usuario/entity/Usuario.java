@@ -154,4 +154,5 @@ public class Usuario implements Autenticavel{
     public void adicionarPerfilALista(Perfil perfil){
         this.perfis.add(perfil);
     }
+    
 }
