@@ -4,11 +4,13 @@
  */
 package br.com.ifba.perfil.entity;
 
+import br.com.ifba.cliente.entity.Cliente;
 import br.com.ifba.coletor.entity.Coletor;
 import br.com.ifba.organizacao.entity.Organizacao;
 import br.com.ifba.status.model.StatusCadastro;
 import br.com.ifba.tipo.model.TipoOrganizacao;
 import br.com.ifba.transportador.entity.Transportador;
+import br.com.ifba.usuario.interfaces.Autenticavel;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,6 +34,18 @@ public class PerfilTest {
                 
         //Assert
         assertEquals(StatusCadastro.APROVADO, coletor.getStatusCadastro());
+    }
+    
+    @Test
+    public void deveReprovarCadastroComSucesso(){
+        //Arrange
+        Coletor coletor = new Coletor();
+        
+        //Act
+        coletor.reprovarCadastro();
+        
+        //Assert
+        assertEquals(StatusCadastro.REPROVADO, coletor.getStatusCadastro());
     }
     
     @Test
@@ -59,6 +73,41 @@ public class PerfilTest {
         
         //Assert
         assertFalse(resultado);
+    }
+    
+    @Test
+    public void oCadastroDeveEstarAprovado(){
+        //Arrange
+        Coletor perfil = new Coletor();
+        perfil.aprovarCadastro();
+        
+        //Act
+        boolean resultado = perfil.isAprovado();
+        
+        //Assert
+        assertTrue(resultado);
+    }
+    
+    @Test
+    public void oCadastroDeveEstarReprovado(){
+       //Arrange
+       Cliente perfil = new Cliente();
+       perfil.reprovarCadastro();
+       
+       //Act
+       boolean resultado = perfil.isAprovado();
+       
+       //Assert
+       assertFalse(resultado);
+    }
+    
+    @Test
+    public void deveRetornarPerfilEspecifico(){
+        //Arrange
+        Perfil perfil = new Coletor();
+        
+        //Assert
+        assertEquals(perfil.getTipoPerfil(), "Perfil coletor de frutos nativos");
     }
     
     //Testa método subscrito
@@ -91,5 +140,19 @@ public class PerfilTest {
         
         //Assert
         assertFalse(resultado);
+    }
+    
+    //Task 05
+    @Test
+    public void aAutenticacaoDoPerfilDeveRetornarTrue(){
+        //Arrange
+        Autenticavel perfil = new Perfil();
+
+        //Act
+        boolean resultado = perfil.autenticar("aurora", "senha123");
+        
+        //Assert
+        assertTrue(resultado);
+        
     }
 }

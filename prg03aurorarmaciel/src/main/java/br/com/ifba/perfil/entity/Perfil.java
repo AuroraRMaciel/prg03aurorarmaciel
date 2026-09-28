@@ -5,12 +5,13 @@
 package br.com.ifba.perfil.entity;
 
 import br.com.ifba.status.model.StatusCadastro;
+import br.com.ifba.usuario.interfaces.Autenticavel;
 
 /**
  *
  * @author auror
  */
-public class Perfil {
+public class Perfil implements Autenticavel{
     private String nome;
     private String descricao;
     private boolean imutavel;
@@ -65,6 +66,17 @@ public class Perfil {
         this.statusCadastro = StatusCadastro.APROVADO;
     }
     
+    public void reprovarCadastro(){
+        this.statusCadastro = StatusCadastro.REPROVADO;
+    }
+    
+    public boolean isAprovado(){
+        if (this.statusCadastro == StatusCadastro.APROVADO){
+            return true;
+        }
+        return false;
+    }
+    
     public boolean validarDados(){
       //Nome nulo ou vazio
       if (this.nome == null || this.nome.trim().isEmpty()){
@@ -75,6 +87,15 @@ public class Perfil {
           return false;
       }
       return true;
+    }
+    
+    public String getTipoPerfil(){
+        return "Perfil genérico";
+    }
+    
+    @Override
+    public boolean autenticar(String login, String senha){
+        return true;
     }
     
 }

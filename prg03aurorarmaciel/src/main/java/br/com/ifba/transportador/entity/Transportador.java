@@ -90,4 +90,9 @@ public class Transportador extends Perfil{
         }
         return true;
     }
+    
+    @Override
+    public String getTipoPerfil(){
+        return "Perfil Transportador/Logistica";
+    }
 }

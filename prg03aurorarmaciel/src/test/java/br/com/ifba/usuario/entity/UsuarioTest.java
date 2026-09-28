@@ -6,6 +6,7 @@ package br.com.ifba.usuario.entity;
 import br.com.ifba.perfil.entity.Perfil;
 import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.status.model.Status;
+import br.com.ifba.usuario.interfaces.Autenticavel;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -238,4 +239,29 @@ public class UsuarioTest {
        
          
     }
+    //Task 05
+    @Test 
+    public void aAutenticacaoDoUsuarioDeveRetornarTrue(){
+        //Arrange
+        Autenticavel usuario = new Usuario("Aurora", "Senha123");
+        
+        //Act
+        boolean resultado = usuario.autenticar("Aurora", "Senha123");
+        
+        //Assert
+        assertTrue(resultado);
+    }
+    
+    @Test
+    public void aAutenticacaoDoUsuarioDeveRetornarFalse(){
+        //Arrange
+        Autenticavel usuario = new Usuario("Aurora", "Senha123");
+        
+        //Act
+        boolean resultado = usuario.autenticar("aurora", "senha123");
+        
+        //Assert
+        assertFalse(resultado);
+    }
+    
 }

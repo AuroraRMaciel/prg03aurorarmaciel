@@ -53,4 +53,9 @@ public class Cliente extends Perfil{
     public void setAvaliacao(double avaliacao) {
         this.avaliacao = avaliacao;
     }
+    
+    @Override
+    public String getTipoPerfil(){
+        return "Perfil cliente";
+    }
 }

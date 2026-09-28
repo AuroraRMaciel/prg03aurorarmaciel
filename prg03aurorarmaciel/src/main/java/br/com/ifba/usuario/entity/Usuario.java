@@ -35,6 +35,13 @@ public class Usuario implements Autenticavel{
     public Usuario(){
         
     }
+    public Usuario(String login, String senha){
+        this.login = login;
+        this.senha = senha;
+        this.perfis = new ArrayList<>();
+        this.status = Status.INATIVO;
+        this.criadoEm = LocalDateTime.now();
+    }
     public Usuario(Pessoa pessoa, String login, String senha){
         this.pessoa = pessoa;
         this.login = login;
@@ -135,16 +142,17 @@ public class Usuario implements Autenticavel{
     
     @Override
     public boolean autenticar(String login, String senha){
-        if (this.login.equals(login) && this.senha.equals(senha)){
+        /*if (this.login.equals(login) && this.senha.equals(senha)){
             return true;
         }
         else{
             return false;
-        }
-        //return this.login.equals(login) && senhaValida(senha);
+        }*/
+        return this.login.equals(login) && this.senha.equals(senha);
     }
     
     public void adicionarPerfilALista(Perfil perfil){
         this.perfis.add(perfil);
     }
+    
 }

@@ -25,10 +25,12 @@ public class Produto {
     public Produto(String nome){
         this.nome = nome;
     }
-    public Produto(String nome, UnidadeMedida unidadeMedida, double quantidadeDisponivel){
+    public Produto(String nome, TipoProduto categoria, UnidadeMedida unidadeMedida, double quantidadeDisponivel, Usuario vendedor){
         this.nome = nome;
+        this.categoria = categoria;
         this.unidadeMedida = unidadeMedida;
         this.quantidadeDisponivel = quantidadeDisponivel;
+        this.vendedor = vendedor;
     }
     
     public String getNome(){

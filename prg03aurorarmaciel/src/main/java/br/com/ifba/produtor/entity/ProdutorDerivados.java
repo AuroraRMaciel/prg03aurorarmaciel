@@ -52,4 +52,9 @@ public class ProdutorDerivados extends Perfil{
     public void adicionaProdutoALista(Produto produto){
         derivadosDisponiveis.add(produto);
     }
+    
+    @Override
+    public String getTipoPerfil(){
+        return "Perfil produtor de derivados";
+    }
 }
