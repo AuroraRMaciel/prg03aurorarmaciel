@@ -10,7 +10,7 @@ import br.com.ifba.status.model.StatusCadastro;
  *
  * @author auror
  */
-public class Perfil {
+public class Perfil{
     private String nome;
     private String descricao;
     private boolean imutavel;
@@ -91,5 +91,6 @@ public class Perfil {
     public String getTipoPerfil(){
         return "Perfil genérico";
     }
+    
     
 }

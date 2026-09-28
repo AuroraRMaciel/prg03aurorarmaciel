@@ -53,4 +53,9 @@ public class Coletor extends Perfil{
     public void adicionarProdutoALista(Produto produto){
         produtosDisponiveis.add(produto);
     }
+    
+    @Override
+    public String getTipoPerfil(){
+        return "Perfil coletor de frutos nativos";
+    }
 }

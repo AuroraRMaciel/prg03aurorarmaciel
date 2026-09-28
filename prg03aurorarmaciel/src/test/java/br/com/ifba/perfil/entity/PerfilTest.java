@@ -103,10 +103,10 @@ public class PerfilTest {
     @Test
     public void deveRetornarPerfilGenerico(){
         //Arrange
-        Perfil perfil = new Perfil();
+        Perfil perfil = new Coletor();
         
         //Assert
-        assertEquals(perfil.getTipoPerfil(), "Perfil genérico");
+        assertEquals(perfil.getTipoPerfil(), "Perfil coletor de furtos nativos");
     }
     
     //Testa método subscrito
