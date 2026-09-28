@@ -237,3 +237,7 @@
     Nome: _____________________________ 
 
     Cargo: _____________________________ 
+
+
+# Resposta Task 04 Atividade - 13 - Polimorfismo
+Na minha classe Produto tenho 3 construtores, o primeiro vazio, o segundo passando como parâmetros o nome do produto e o útimo passando todos os atributos (nome, categoria, unidadeMedida, quantidadeDisponivel e vendedor). Pois terão situações em que se cadastrará um novo produto passando apenas o nome e em outras passando todas as informações. Exemplo: Quando um usuário tiver se cadastrando no sistema e descrevendo os seus perfis, terá a possibilidade de descrever também os produtos que trabalha, mesmo estando fora da época de coleta ou produção pois existe a possibilidade de cadastrar o produto passando apenas o seu nome.
