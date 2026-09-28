@@ -10,6 +10,7 @@ import br.com.ifba.organizacao.entity.Organizacao;
 import br.com.ifba.status.model.StatusCadastro;
 import br.com.ifba.tipo.model.TipoOrganizacao;
 import br.com.ifba.transportador.entity.Transportador;
+import br.com.ifba.usuario.interfaces.Autenticavel;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -101,12 +102,12 @@ public class PerfilTest {
     }
     
     @Test
-    public void deveRetornarPerfilGenerico(){
+    public void deveRetornarPerfilEspecifico(){
         //Arrange
         Perfil perfil = new Coletor();
         
         //Assert
-        assertEquals(perfil.getTipoPerfil(), "Perfil coletor de furtos nativos");
+        assertEquals(perfil.getTipoPerfil(), "Perfil coletor de frutos nativos");
     }
     
     //Testa método subscrito
@@ -139,5 +140,19 @@ public class PerfilTest {
         
         //Assert
         assertFalse(resultado);
+    }
+    
+    //Task 05
+    @Test
+    public void aAutenticacaoDoPerfilDeveRetornarTrue(){
+        //Arrange
+        Autenticavel perfil = new Perfil();
+
+        //Act
+        boolean resultado = perfil.autenticar("aurora", "senha123");
+        
+        //Assert
+        assertTrue(resultado);
+        
     }
 }
