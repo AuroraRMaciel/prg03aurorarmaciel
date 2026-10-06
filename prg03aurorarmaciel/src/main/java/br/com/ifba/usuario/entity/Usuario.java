@@ -154,5 +154,29 @@ public class Usuario implements Autenticavel{
     public void adicionarPerfilALista(Perfil perfil){
         this.perfis.add(perfil);
     }
+
+    //Task 02
+    //Escolhi o cpf pois é único e identifica bem um usuario
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        
+        Usuario usuario = (Usuario) o;
+        
+        if (pessoa.getCpf() != null){
+            return pessoa.getCpf().equals(usuario.pessoa.getCpf());
+        }else{
+            return usuario.pessoa.getCpf() == null;
+        }
+    }
     
+    @Override
+    public int hashCode(){
+        if (pessoa.getCpf() != null){
+            return pessoa.getCpf().hashCode();
+        }else{
+            return 0;
+        }
+    }
 }

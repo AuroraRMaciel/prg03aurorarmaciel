@@ -11,6 +11,7 @@ br\com\ifba\organizacao\entity\Organizacao.class
 br\com\ifba\transportador\entity\Transportador.class
 br\com\ifba\status\model\Status.class
 br\com\ifba\usuario\interfaces\Autenticavel.class
+br\com\ifba\usuario\repository\RepositorioUsuarioEmMemoria.class
 br\com\ifba\usuario\view\TelaCadastro.class
 br\com\ifba\prg03aurorarmaciel\Prg03aurorarmaciel.class
 br\com\ifba\usuario\validar\ValidadorCadastro.class
