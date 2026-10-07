@@ -8,6 +8,7 @@ import br.com.ifba.login.view.TelaLogin;
 import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.usuario.validar.ValidadorCadastro;
 import br.com.ifba.usuario.entity.Usuario;
+import br.com.ifba.usuario.repository.RepositorioUsuarioEmMemoria;
 import br.com.ifba.usuario.validar.ValidadorUsuario;
 
 /**
@@ -219,12 +220,15 @@ public class TelaCadastro extends javax.swing.JFrame {
         
         usuario.setNomeUsuario(usuario.getPessoa().getNomeCompleto().split("\\s+")[0]);
         
+        RepositorioUsuarioEmMemoria usuarios = new RepositorioUsuarioEmMemoria();
+        usuarios.cadastrarUsuario(usuario);
+        
         //Chamada das funções
-        boolean camposPreenchidos = ValidadorUsuario.camposPreenchidos(usuario, confirmarSenha);
-        boolean senhasIguais = ValidadorUsuario.senhasIguais(usuario, confirmarSenha);
-        boolean resultado = ValidadorCadastro.contemPalavraProibida(usuario.getLogin());
-        boolean cpfValido = ValidadorUsuario.cpfValido(usuario.getPessoa().getCpf());
-        boolean senhaForte = ValidadorUsuario.senhaForte(usuario.getSenha());
+        boolean camposPreenchidos = ValidadorUsuario.camposPreenchidos(usuarios.getPorLogin().get(usuario.getLogin()), confirmarSenha);
+        boolean senhasIguais = ValidadorUsuario.senhasIguais(usuarios.getPorLogin().get(usuario.getLogin()), confirmarSenha);
+        boolean resultado = ValidadorCadastro.contemPalavraProibida(usuarios.getPorLogin().get(usuario.getLogin()).getLogin());
+        boolean cpfValido = ValidadorUsuario.cpfValido(usuarios.getPorLogin().get(usuario.getLogin()).getPessoa().getCpf());
+        boolean senhaForte = ValidadorUsuario.senhaForte(usuarios.getPorLogin().get(usuario.getLogin()).getSenha());
         
         //Verifica se todos os campos estão preenchidos
         if (camposPreenchidos == false){
@@ -240,12 +244,13 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
         //Verifica se a senha é forte
         else if (senhaForte == false){
-            javax.swing.JOptionPane.showMessageDialog(this, "A senha " + usuario.getSenha() + " não é forte!", "Senha fraca", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "A senha " + usuarios.getPorLogin().get(usuario.getLogin()).getSenha() + " não é forte!", "Senha fraca", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
         //Verifica se o login contém palavra proibida
         //Se a palavra usada para login não for proibida
         else if (resultado == false){
-            javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuario.getPessoa().getNomeCompleto() + "\nCpf: " + usuario.getPessoa().getCpf() + "\nLogin: " + usuario.getLogin() + "\nSenha: " + usuario.getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuarios.getPorLogin().get(usuario.getLogin()).getPessoa().getNomeCompleto() + "\nCpf: " + usuarios.getPorLogin().get(usuario.getLogin()).getPessoa().getCpf() + 
+                    "\nLogin: " + usuarios.getPorLogin().get(usuario.getLogin()).getLogin() + "\nSenha: " + usuarios.getPorLogin().get(usuario.getLogin()).getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
         //Se a palavra for proibida
         else{

@@ -18,8 +18,16 @@ public class RepositorioUsuarioEmMemoria {
     //Atributos
     private final List<Usuario> usuarios = new ArrayList<>();
     private final Map<String, Usuario> porLogin = new HashMap<>();
-    
+
     //Métodos
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public Map<String, Usuario> getPorLogin() {
+        return porLogin;
+    }
+    
     public void cadastrarUsuario(Usuario usuario){
         //Verificar se o login utilizado já está cadastrado
         if (porLogin.get(usuario.getLogin()) != null){
