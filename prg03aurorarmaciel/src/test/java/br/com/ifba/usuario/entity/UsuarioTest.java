@@ -7,6 +7,7 @@ import br.com.ifba.perfil.entity.Perfil;
 import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.status.model.Status;
 import br.com.ifba.usuario.interfaces.Autenticavel;
+import br.com.ifba.usuario.repository.RepositorioUsuarioEmMemoria;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -264,4 +265,114 @@ public class UsuarioTest {
         assertFalse(resultado);
     }
     
+    @Test
+    public void testaAIgualdadeDeObjetosDoTipoUsuarioPeloCpfComOEqualsDeUsuario(){
+        //Arrange
+        Pessoa pessoa = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "F");
+        Usuario usuario1 = new Usuario(pessoa, "Aurora", "Senha123@");
+        Usuario usuario2 = new Usuario(pessoa, "auroraRodrigues", "Senha123");
+        
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios.add(usuario1);
+        usuarios.add(usuario2);
+        
+        //Act
+        boolean resultado = usuarios.get(0).equals(usuarios.get(1));
+        
+        //Assert
+        assertTrue(resultado);
+    }
+    
+    @Test
+    public void testaADiferencaDeObjetosDoTipoUsuarioPeloCpfComEqualsDeUsuario(){
+        //Arrange
+        Pessoa pessoa1 = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "F");
+        Pessoa pessoa2 = new Pessoa("12345678908", "Aurora Rodrigues", "28/05", "F");
+        
+        Usuario usuario1 = new Usuario(pessoa1, "Aurora", "Senha123");
+        Usuario usuario2 = new Usuario(pessoa2, "auroraRodrigues", "senha123@");
+        
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios.add(usuario1);
+        usuarios.add(usuario2);
+        
+        //Act
+        boolean resultado = usuarios.get(0).equals(usuarios.get(1));
+        
+        //Assert
+        assertFalse(resultado);
+    }
+    @Test
+    public void testaAIgualdadeDeObjetosDoTipoUsuarioPeloCpfComOHashCodeDeUsuario(){
+        //Arrange
+        Pessoa pessoa = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "F");
+        Usuario usuario1 = new Usuario(pessoa, "Aurora", "Senha123@");
+        Usuario usuario2 = new Usuario(pessoa, "auroraRodrigues", "Senha123");
+        
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios.add(usuario1);
+        usuarios.add(usuario2);
+        
+        //Act
+        boolean resultado = usuarios.get(0).hashCode() == usuarios.get(1).hashCode();
+        
+        //Assert
+        assertTrue(resultado);
+    }
+    
+    @Test
+    public void testaADiferencaDeObjetosDoTipoUsuarioPeloCpfComHashCodeDeUsuario(){
+        //Arrange
+        Pessoa pessoa1 = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "F");
+        Pessoa pessoa2 = new Pessoa("12345678908", "Aurora Rodrigues", "28/05", "F");
+        
+        Usuario usuario1 = new Usuario(pessoa1, "Aurora", "Senha123");
+        Usuario usuario2 = new Usuario(pessoa2, "auroraRodrigues", "senha123@");
+        
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios.add(usuario1);
+        usuarios.add(usuario2);
+        
+        //Act
+        boolean resultado = usuarios.get(0).hashCode() == usuarios.get(1).hashCode();
+        
+        //Assert
+        assertFalse(resultado);
+    }
+    
+     @Test
+    public void testaAIgualdadeDeObjetosDoTipoUsuarioPeloCpfComOContains(){
+        //Arrange
+        Pessoa pessoa = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "F");
+        Usuario usuario1 = new Usuario(pessoa, "Aurora", "Senha123@");
+        Usuario usuario2 = new Usuario(pessoa, "auroraRodrigues", "Senha123");
+        
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios.add(usuario1);
+        
+        //Act
+        boolean resultado = usuarios.contains(usuario2);
+        
+        //Assert
+        assertTrue(resultado);
+    }
+    
+    @Test
+    public void testaADiferencaDeObjetosDoTipoUsuarioPeloCpfComContains(){
+        //Arrange
+        Pessoa pessoa1 = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "F");
+        Pessoa pessoa2 = new Pessoa("12345678908", "Aurora Rodrigues", "28/05", "F");
+        
+        Usuario usuario1 = new Usuario(pessoa1, "Aurora", "Senha123");
+        Usuario usuario2 = new Usuario(pessoa2, "auroraRodrigues", "senha123@");
+        
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios.add(usuario1);
+        
+        //Act
+        boolean resultado = usuarios.contains(usuario2);
+        
+        //Assert
+        assertFalse(resultado);
+    }
 }

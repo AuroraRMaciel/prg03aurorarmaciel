@@ -241,3 +241,6 @@
 
 # Resposta Task 04 Atividade - 13 - Polimorfismo
 Na minha classe Produto tenho 3 construtores, o primeiro vazio, o segundo passando como parâmetros o nome do produto e o útimo passando todos os atributos (nome, categoria, unidadeMedida, quantidadeDisponivel e vendedor). Pois terão situações em que se cadastrará um novo produto passando apenas o nome e em outras passando todas as informações. Exemplo: Quando um usuário tiver se cadastrando no sistema e descrevendo os seus perfis, terá a possibilidade de descrever também os produtos que trabalha, mesmo estando fora da época de coleta ou produção pois existe a possibilidade de cadastrar o produto passando apenas o seu nome.
+
+# Resposta Task 03 Atividade - 15 - Collections
+A busca em um arrayList com for acessa cada elemento da lista buscando o seu campo login e comparando se esse campo é igual ao login procurado. Se o elemento que tenha o login igual ao buscado estiver na última posição de uma lista de 50 elementos serão feitas 50 buscas até encontrar. Enquanto se tivermos um hashMap com 50000 elementos o login buscado será encontrado em muito pouco tempo pois o hashMap busca a posicao correspondente a aquela chave.
