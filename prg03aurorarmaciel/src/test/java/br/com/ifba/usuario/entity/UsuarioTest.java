@@ -7,6 +7,7 @@ import br.com.ifba.perfil.entity.Perfil;
 import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.status.model.Status;
 import br.com.ifba.usuario.interfaces.Autenticavel;
+import br.com.ifba.usuario.repository.RepositorioUsuarioEmMemoria;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
