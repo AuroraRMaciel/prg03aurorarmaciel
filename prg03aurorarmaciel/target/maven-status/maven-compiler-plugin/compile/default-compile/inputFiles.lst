@@ -1,7 +1,10 @@
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\cliente\entity\Cliente.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\coletor\entity\Coletor.java
+C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\entrega\entity\Entrega.java
+C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\item\entity\ItemPedido.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\login\view\TelaLogin.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\organizacao\entity\Organizacao.java
+C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\pedido\entity\Pedido.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\perfil\entity\Perfil.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\pessoa\entity\Pessoa.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\prg03aurorarmaciel\Prg03aurorarmaciel.java
@@ -9,6 +12,9 @@ C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\j
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\produtor\entity\ProdutorDerivados.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\status\model\Status.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\status\model\StatusCadastro.java
+C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\status\model\StatusEntrega.java
+C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\status\model\StatusPedido.java
+C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\tipo\model\FormaPagamento.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\tipo\model\TipoOrganizacao.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\tipo\model\TipoProduto.java
 C:\Users\auror\OneDrive\Desktop\prg03aurorarmaciel\prg03aurorarmaciel\src\main\java\br\com\ifba\transportador\entity\Transportador.java
