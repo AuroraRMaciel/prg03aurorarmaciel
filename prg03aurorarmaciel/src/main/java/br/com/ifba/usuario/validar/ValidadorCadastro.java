@@ -12,6 +12,7 @@ public class ValidadorCadastro {
     public static boolean contemPalavraProibida(String texto){
         //Cria o array de string com palavras proibidas
         String palavrasProibidas[] = {"admin", "teste", "root", "senha123"};
+        texto = texto.toLowerCase();
         
         //For-each que percorre o vetor
         for (String palavra: palavrasProibidas){

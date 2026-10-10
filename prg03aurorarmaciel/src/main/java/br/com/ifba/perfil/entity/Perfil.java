@@ -12,12 +12,14 @@ import br.com.ifba.usuario.interfaces.Autenticavel;
  * @author auror
  */
 public class Perfil implements Autenticavel{
+    //Atributos
     private String nome;
     private String descricao;
     private boolean imutavel;
     private String imagemUrl;
     private StatusCadastro statusCadastro;
     
+    //Métodos
     public Perfil(){
         
     }

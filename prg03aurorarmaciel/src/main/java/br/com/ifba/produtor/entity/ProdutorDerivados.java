@@ -14,10 +14,12 @@ import java.util.List;
  * @author auror
  */
 public class ProdutorDerivados extends Perfil{
+    //Atributos
     private List<Produto> derivadosDisponiveis;
     private Organizacao associacaoCooperativa;
     private double avaliacao;
     
+    //Métodos
     public ProdutorDerivados(){
         
     }

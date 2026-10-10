@@ -14,10 +14,12 @@ import java.util.List;
  * @author auror
  */
 public class Coletor extends Perfil{
+    //Atributos
     private List<Produto> produtosDisponiveis;
     private Organizacao associacaoCooperativa;
     private double avaliacao;
     
+    //Métodos
     public Coletor(){
         
     }

@@ -14,6 +14,7 @@ import java.util.List;
  * @author auror
  */
 public class Transportador extends Perfil{
+    //Atributos
     private Pessoa motorista;
     private String cnh;
     private Organizacao empresa;
@@ -21,6 +22,7 @@ public class Transportador extends Perfil{
     private boolean disponivel;
     private double avaliacao;
     
+    //Métodos
     public Transportador(){
         
     }
