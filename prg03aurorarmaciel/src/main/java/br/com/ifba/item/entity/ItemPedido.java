@@ -11,10 +11,12 @@ import br.com.ifba.produto.entity.Produto;
  * @author auror
  */
 public class ItemPedido {
+    //Atributos
     private Produto produto;
     private double quantidade;
     private double precoUnitario;
     
+    //Métodos
     public Produto getProduto(){
         return produto;
     }

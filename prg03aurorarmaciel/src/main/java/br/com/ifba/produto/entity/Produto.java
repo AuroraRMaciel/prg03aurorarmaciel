@@ -13,12 +13,14 @@ import br.com.ifba.usuario.entity.Usuario;
  * @author auror
  */
 public class Produto {
+    //Atributos
     private String nome;
     private TipoProduto categoria;
     private UnidadeMedida unidadeMedida;
     private double quantidadeDisponivel;
     private Usuario vendedor;
     
+    //Métodos
     public Produto(){
         
     }
@@ -67,5 +69,9 @@ public class Produto {
     }
     public void setVendedor(Usuario vendedor){
         this.vendedor = vendedor;
+    }
+    
+    public void atualizarEstoque (double quantidadeVendida){
+        quantidadeDisponivel = quantidadeDisponivel - quantidadeVendida;
     }
 }

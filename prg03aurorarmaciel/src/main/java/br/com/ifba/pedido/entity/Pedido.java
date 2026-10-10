@@ -18,6 +18,7 @@ import java.util.List;
  * @author auror
  */
 public class Pedido {
+    //Atributos
     private LocalDateTime dataPedido;
     private StatusPedido statusPedido;
     private double valorTotal;
@@ -27,6 +28,7 @@ public class Pedido {
     private List<ItemPedido> itens = new ArrayList<>();
     private boolean isEncomenda;
 
+    //Métodos
     public LocalDateTime getDataPedido() {
         return dataPedido;
     }
@@ -91,6 +93,20 @@ public class Pedido {
         this.isEncomenda = isEncomenda;
     }
     
+    public void adicionarItem(ItemPedido item){
+        if (item != null){
+            itens.add(item);
+        }
+    }
+    
+    public double calcularValorTotal(){
+        double valor = 0;
+        for(int i = 0; i < itens.size(); i++){
+            //A cada item da lista valor passa a ser valor + preço unitário daquele índice vezes a quantidade
+            valor += itens.get(i).getPrecoUnitario() * itens.get(i).getQuantidade();
+        }
+        return valor;
+    }
     
     
 }

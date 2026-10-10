@@ -15,11 +15,13 @@ import java.util.List;
  * @author auror
  */
 public class Cliente extends Perfil{
+    //Atributos
     private TipoOrganizacao tipoCliente;
     private List<ItemPedido> carrinhoCompra;
     private List<Pedido> historicoPedidos;
     private double avaliacao;
     
+    //Métodos
     public Cliente(){
         
     }

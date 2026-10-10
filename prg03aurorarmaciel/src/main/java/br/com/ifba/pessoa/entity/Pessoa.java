@@ -9,11 +9,13 @@ package br.com.ifba.pessoa.entity;
  * @author auror
  */
 public class Pessoa {
+    //Atributos
     private String cpf;
     private String nomeCompleto;
     private String dataNascimento;
     private String genero;
     
+    //Métodos
     public Pessoa(){
         
     }

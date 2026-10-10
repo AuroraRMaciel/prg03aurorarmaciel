@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
  * @author auror
  */
 public class Entrega {
+    //Atributos
     private Pedido pedido;
     private Transportador transportador;
     private StatusEntrega statusEntrega;
@@ -21,6 +22,7 @@ public class Entrega {
     private LocalDateTime dataEnvio;
     private LocalDateTime dataEntregaPrevista;
     
+    //Métodos
     public Pedido getPedido(){
         return pedido;
     }

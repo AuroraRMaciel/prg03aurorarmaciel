@@ -11,11 +11,13 @@ import br.com.ifba.tipo.model.TipoOrganizacao;
  * @author auror
  */
 public class Organizacao {
+    //Atributos
     private TipoOrganizacao tipo;
     private String cnpj;
     private String razaoSocial;
     private String inscricaoEstadual;
     
+    //Métodos
     public Organizacao(){
         
     }
