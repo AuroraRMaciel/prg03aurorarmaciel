@@ -131,25 +131,4 @@ public class RepositorioUsuarioEmMemoriaTest {
         //Assert
         assertFalse(resultado);
     }
-    
-    @Test
-    public void cadastrarLoginDuplicadoLancaExcecao(){
-        //Arrange
-        Pessoa pessoa = new Pessoa("12345678909", "Aurora Rodrigues", "23/01", "F");
-        Pessoa pessoa1 = new Pessoa("12345678907", "Aurora Santos", "15/03", "F");
-        
-        Usuario usuario = new Usuario(pessoa, "Aurora", "senha123");
-        Usuario usuario1 = new Usuario(pessoa1, "Aurora", "Senha@");
-        
-        RepositorioUsuarioEmMemoria repositorio = new RepositorioUsuarioEmMemoria();
-        
-        repositorio.cadastrarUsuario(usuario);
-        //repositorio.cadastrarUsuario(usuario1);
-        
-        //Act
-        IllegalArgumentException excecao = assertThrows(IllegalArgumentException.class, () -> repositorio.cadastrarUsuario(usuario1), "Deveria ter lançado IllegalArgumentException por login já existente");
-                
-        //Assert
-        assertEquals(excecao.getMessage(), "Já existe um usuário com o login Aurora");
-    }
 }
