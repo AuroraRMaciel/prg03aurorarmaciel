@@ -1,1 +1,2 @@
-/prg03aurorarmaciel/target/
+/prg03aurorarmaciel/target
+/prg03aurorarmaciel/src/main/resources/META_INF/persistence.xml

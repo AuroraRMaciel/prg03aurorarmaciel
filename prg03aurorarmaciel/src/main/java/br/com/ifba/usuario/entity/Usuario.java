@@ -7,27 +7,45 @@ import br.com.ifba.usuario.interfaces.Autenticavel;
 import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.perfil.entity.Perfil;
 import br.com.ifba.status.model.Status;
+import jakarta.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author auror
  */
+@Entity
+@Table (name = "usuarios")
 public class Usuario implements Autenticavel{
     //Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private Pessoa pessoa;
     private List<Perfil> perfis;
     private Perfil perfilAtivo;
     private Status status;
     
+    @Column(name = "nome_usuario", nullable = false)
     private String nomeUsuario;
     private String telefone;
+    
     private String email;
     private String login;
     private String senha;
+    
+    @Column (name = "criado_em")
     private LocalDateTime criadoEm;
+    
+    @Column (name = "ultimo_login")
     private LocalDateTime ultimoLogin;
     private String endereco;
     
@@ -51,6 +69,10 @@ public class Usuario implements Autenticavel{
         this.criadoEm = LocalDateTime.now();
     }
 
+    public Long getId() {
+        return id;
+    }
+    
     public Pessoa getPessoa(){
         return pessoa;
     }

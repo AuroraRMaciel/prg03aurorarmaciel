@@ -1,4 +1,5 @@
 br\com\ifba\unidade\model\UnidadeMedida.class
+br\com\ifba\usuario\view\TelaEdicao$1.class
 br\com\ifba\usuario\validar\ValidadorUsuario.class
 br\com\ifba\item\entity\ItemPedido.class
 br\com\ifba\cliente\entity\Cliente.class
@@ -16,6 +17,7 @@ br\com\ifba\coletor\entity\Coletor.class
 br\com\ifba\tipo\model\TipoOrganizacao.class
 br\com\ifba\produto\entity\Produto.class
 br\com\ifba\pessoa\entity\Pessoa.class
+br\com\ifba\usuario\view\TelaListagem.class
 br\com\ifba\tipo\model\FormaPagamento.class
 br\com\ifba\status\model\StatusPedido.class
 br\com\ifba\status\model\StatusEntrega.class
@@ -23,6 +25,7 @@ br\com\ifba\produtor\entity\ProdutorDerivados.class
 br\com\ifba\organizacao\entity\Organizacao.class
 br\com\ifba\usuario\interfaces\Autenticavel.class
 br\com\ifba\usuario\view\TelaCadastro.class
+br\com\ifba\usuario\view\TelaEdicao.class
 br\com\ifba\prg03aurorarmaciel\Prg03aurorarmaciel.class
 br\com\ifba\login\view\TelaLogin$1.class
 br\com\ifba\entrega\entity\Entrega.class
