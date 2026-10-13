@@ -1,0 +1,1 @@
+# Task 06: Os dados do usuário que não devem ser expostos em uma listagem são a senha, login e o id.
