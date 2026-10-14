@@ -50,7 +50,7 @@ public class TelaEdicao extends javax.swing.JFrame {
         lblNomeProjeto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblNomeProjeto.setText("EcoCaatinga");
 
-        btnAlterar.setBackground(new java.awt.Color(0, 153, 0));
+        btnAlterar.setBackground(new java.awt.Color(51, 153, 0));
         btnAlterar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
         btnAlterar.setText("Editar");
@@ -60,7 +60,7 @@ public class TelaEdicao extends javax.swing.JFrame {
         btnCancelar.setText("Cancelar");
 
         jListCampo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Nome", "Cpf", "Genero", "Telefone", "Email", "Login ", "Senha" };
+            String[] strings = { "Nome", "Cpf", "Gênero", "Telefone", "Email", "Login ", "Senha" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });

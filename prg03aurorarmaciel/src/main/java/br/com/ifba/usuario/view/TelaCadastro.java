@@ -90,7 +90,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         lblConfirmarSenha.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblConfirmarSenha.setText("Confirmar senha:");
 
-        btnCadastrar.setBackground(new java.awt.Color(0, 153, 51));
+        btnCadastrar.setBackground(new java.awt.Color(51, 153, 0));
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setText("Cadastrar");
