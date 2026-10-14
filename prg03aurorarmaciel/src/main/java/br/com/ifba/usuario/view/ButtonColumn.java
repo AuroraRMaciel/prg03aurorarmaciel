@@ -1,0 +1,88 @@
+package br.com.ifba.usuario.view;
+
+import br.com.ifba.usuario.view.TelaEdicao;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.AbstractCellEditor;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+
+public class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, TableCellEditor {
+    private JButton renderButton;
+    private JButton editButton;
+    private String text;
+    private ImageIcon icon;
+    private String acao; // "EDITAR" ou "EXCLUIR"
+
+    public ButtonColumn(JTable table, int column, ImageIcon icon, String acao) {
+        this.icon = icon;
+        this.acao = acao;
+        
+        renderButton = new JButton();
+        renderButton.setIcon(icon);
+        
+        editButton = new JButton();
+        editButton.setIcon(icon);
+        editButton.setFocusPainted(false);
+        
+        editButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            fireEditingStopped();
+            int linhaSelecionada = table.getSelectedRow();
+                
+            if (linhaSelecionada != -1) {
+                // Verifica qual ação executar com base no parâmetro passado
+                if (acao.equals("EDITAR")) {
+                    // Lógica para abrir a tela de edição
+                    String nomeUsuario = (String) table.getValueAt(linhaSelecionada, 0);
+                        
+                    TelaEdicao telaEditar = new TelaEdicao();
+                    telaEditar.setVisible(true);
+                        
+                } else if (acao.equals("EXCLUIR")) {
+                    // Lógica para abrir o JOptionPane de exclusão
+                    int resposta = JOptionPane.showConfirmDialog(
+                        table, 
+                        "Deseja realmente excluir este usuário?", 
+                        "Confirmação de Exclusão", 
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                    );
+                        
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        // Remove visualmente da tabela (ou apaga do banco de dados)
+                        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) table.getModel();
+                        model.removeRow(linhaSelecionada);
+                        }
+                    }
+                }
+            }
+        });
+
+        table.getColumnModel().getColumn(column).setCellRenderer(this);
+        table.getColumnModel().getColumn(column).setCellEditor(this);
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        renderButton.setIcon(icon);
+        return renderButton;
+    }
+
+    @Override
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        editButton.setIcon(icon);
+        return editButton;
+    }
+
+    @Override
+    public Object getCellEditorValue() {
+        return text;
+    }
+}
