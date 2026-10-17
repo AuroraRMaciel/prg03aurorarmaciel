@@ -7,16 +7,29 @@ package br.com.ifba.produto.entity;
 import br.com.ifba.tipo.model.TipoProduto;
 import br.com.ifba.unidade.model.UnidadeMedida;
 import br.com.ifba.usuario.entity.Usuario;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author auror
  */
+@Entity
+@Table (name = "produtos")
 public class Produto {
     //Atributos
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private long id;
     private String nome;
     private TipoProduto categoria;
+    @Column (name = "unidade_medida")
     private UnidadeMedida unidadeMedida;
+    @Column (name = "quantidade_disponivel")
     private double quantidadeDisponivel;
     private Usuario vendedor;
     
@@ -33,6 +46,10 @@ public class Produto {
         this.unidadeMedida = unidadeMedida;
         this.quantidadeDisponivel = quantidadeDisponivel;
         this.vendedor = vendedor;
+    }
+
+    public long getId() {
+        return id;
     }
     
     public String getNome(){

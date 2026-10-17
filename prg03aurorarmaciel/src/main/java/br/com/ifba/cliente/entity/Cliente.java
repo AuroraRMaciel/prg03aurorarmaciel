@@ -8,14 +8,24 @@ import br.com.ifba.item.entity.ItemPedido;
 import br.com.ifba.pedido.entity.Pedido;
 import br.com.ifba.perfil.entity.Perfil;
 import br.com.ifba.tipo.model.TipoOrganizacao;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.List;
 
 /**
  *
  * @author auror
  */
+@Entity
+@Table (name = "clientes")
 public class Cliente extends Perfil{
     //Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private TipoOrganizacao tipoCliente;
     private List<ItemPedido> carrinhoCompra;
     private List<Pedido> historicoPedidos;
@@ -24,6 +34,10 @@ public class Cliente extends Perfil{
     //Métodos
     public Cliente(){
         
+    }
+
+    public long getId() {
+        return id;
     }
 
     public TipoOrganizacao getTipoCliente() {

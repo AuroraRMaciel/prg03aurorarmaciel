@@ -7,14 +7,24 @@ package br.com.ifba.transportador.entity;
 import br.com.ifba.organizacao.entity.Organizacao;
 import br.com.ifba.perfil.entity.Perfil;
 import br.com.ifba.pessoa.entity.Pessoa;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.List;
 
 /**
  *
  * @author auror
  */
+@Entity
+@Table (name = "transportadores")
 public class Transportador extends Perfil{
     //Atributos
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private long id;
     private Pessoa motorista;
     private String cnh;
     private Organizacao empresa;
@@ -25,6 +35,10 @@ public class Transportador extends Perfil{
     //Métodos
     public Transportador(){
         
+    }
+
+    public long getId() {
+        return id;
     }
 
     public Pessoa getMotorista() {

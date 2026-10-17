@@ -6,17 +6,30 @@ package br.com.ifba.perfil.entity;
 
 import br.com.ifba.status.model.StatusCadastro;
 import br.com.ifba.usuario.interfaces.Autenticavel;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author auror
  */
+@Entity
+@Table (name = "perfis")
 public class Perfil implements Autenticavel{
     //Atributos
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private long id;
     private String nome;
     private String descricao;
     private boolean imutavel;
+    @Column (name = "imagem_url")
     private String imagemUrl;
+    @Column (name = "status_cadastro")
     private StatusCadastro statusCadastro;
     
     //Métodos
@@ -26,6 +39,10 @@ public class Perfil implements Autenticavel{
     public Perfil(String nome, String descricao){
         this.nome = nome;
         this.descricao = descricao;
+    }
+
+    public long getId() {
+        return id;
     }
     
     public String getNome(){

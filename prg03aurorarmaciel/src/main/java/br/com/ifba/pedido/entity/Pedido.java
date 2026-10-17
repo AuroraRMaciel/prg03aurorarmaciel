@@ -9,6 +9,12 @@ import br.com.ifba.item.entity.ItemPedido;
 import br.com.ifba.status.model.StatusPedido;
 import br.com.ifba.tipo.model.FormaPagamento;
 import br.com.ifba.usuario.entity.Usuario;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +23,33 @@ import java.util.List;
  *
  * @author auror
  */
+@Entity
+@Table (name = "pedidos")
 public class Pedido {
     //Atributos
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private long id;
+    @Column (name = "data_pedido")
     private LocalDateTime dataPedido;
+    @Column (name = "status_pedido")
     private StatusPedido statusPedido;
+    @Column (name = "valor_total")
     private double valorTotal;
+    @Column (name = "forma_pagamento")
     private FormaPagamento formaPagamento;
     private Cliente cliente;
     private Usuario vendedor;
     private List<ItemPedido> itens = new ArrayList<>();
+    @Column (name = "is_encomenda")
     private boolean isEncomenda;
 
     //Métodos
+    
+    public long getId() {
+        return id;
+    }
+
     public LocalDateTime getDataPedido() {
         return dataPedido;
     }

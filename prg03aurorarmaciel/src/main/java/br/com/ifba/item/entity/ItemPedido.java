@@ -5,19 +5,36 @@
 package br.com.ifba.item.entity;
 
 import br.com.ifba.produto.entity.Produto;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author auror
  */
+@Entity
+@Table (name = "itens_pedidos")
 public class ItemPedido {
     //Atributos
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private long id;
     private Produto produto;
     private double quantidade;
+    @Column (name = "preco_unitario")
     private double precoUnitario;
     
     //Métodos
-    public Produto getProduto(){
+    
+    public long getId(){
+        return id;
+    }
+
+    public Produto getProduto() {
         return produto;
     }
     public void setProduto(Produto produto){

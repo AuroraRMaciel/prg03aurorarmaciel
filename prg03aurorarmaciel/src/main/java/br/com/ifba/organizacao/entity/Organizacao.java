@@ -5,16 +5,29 @@
 package br.com.ifba.organizacao.entity;
 
 import br.com.ifba.tipo.model.TipoOrganizacao;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  *
  * @author auror
  */
+@Entity
+@Table (name = "organizacoes")
 public class Organizacao {
     //Atributos
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private long id;
     private TipoOrganizacao tipo;
     private String cnpj;
+    @Column (name = "razao_social")
     private String razaoSocial;
+    @Column (name = "inscricao_estadual")
     private String inscricaoEstadual;
     
     //Métodos
@@ -25,6 +38,10 @@ public class Organizacao {
         this.tipo = tipo;
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
+    }
+
+    public long getId() {
+        return id;
     }
     
     public TipoOrganizacao getTipo(){

@@ -4,14 +4,28 @@
  */
 package br.com.ifba.pessoa.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /**
  *
  * @author auror
  */
+@Entity
+@Table (name = "pessoas")
 public class Pessoa {
     //Atributos
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private long id;
     private String cpf;
+    @Column (name = "nome_completo")
     private String nomeCompleto;
+    @Column (name = "data_nascimento")
     private String dataNascimento;
     private String genero;
     
@@ -24,6 +38,10 @@ public class Pessoa {
         this.nomeCompleto = nomeCompleto;
         this.dataNascimento = dataNascimento;
         this.genero = genero;
+    }
+
+    public long getId() {
+        return id;
     }
     
     public String getCpf(){
