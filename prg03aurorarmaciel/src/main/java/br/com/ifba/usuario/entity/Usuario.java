@@ -7,6 +7,7 @@ import br.com.ifba.usuario.interfaces.Autenticavel;
 import br.com.ifba.pessoa.entity.Pessoa;
 import br.com.ifba.perfil.entity.Perfil;
 import br.com.ifba.status.model.Status;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,6 +17,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -29,8 +34,17 @@ public class Usuario implements Autenticavel{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    // Adicione a anotação de relacionamento (@OneToOne ou @ManyToOne)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pessoa_id") // Nome da coluna correspondente no banco
     private Pessoa pessoa;
+    // Informe ao Hibernate que é um relacionamento entre entidades
+    @OneToMany
+    @JoinColumn(name = "perfis_id") // Nome da coluna de chave estrangeira no banco
     private List<Perfil> perfis;
+    // Informe ao Hibernate que é um relacionamento entre entidades
+    @ManyToOne
+    @JoinColumn(name = "perfil_ativo_id") // Nome da coluna de chave estrangeira no banco
     private Perfil perfilAtivo;
     private Status status;
     

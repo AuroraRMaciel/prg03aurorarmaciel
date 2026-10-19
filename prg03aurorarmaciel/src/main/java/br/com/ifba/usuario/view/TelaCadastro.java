@@ -10,6 +10,8 @@ import br.com.ifba.usuario.validar.ValidadorCadastro;
 import br.com.ifba.usuario.entity.Usuario;
 import br.com.ifba.usuario.repository.RepositorioUsuarioEmMemoria;
 import br.com.ifba.usuario.validar.ValidadorUsuario;
+import br.com.ifba.infrastructure.util.JPAUtil;
+import jakarta.persistence.EntityManager;
 
 /**
  *
@@ -18,7 +20,8 @@ import br.com.ifba.usuario.validar.ValidadorUsuario;
 public class TelaCadastro extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCadastro.class.getName());
-
+    //Chamada do garçom
+    private final static EntityManager entityManager = JPAUtil.getEntityManager();
     /**
      * Creates new form TelaCadastro
      */
@@ -199,9 +202,18 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void txtGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGeneroActionPerformed
     // TODO add your handling code here:
     }//GEN-LAST:event_txtGeneroActionPerformed
+    private boolean salvar(Usuario usuario){//Criação da função salvar()
+        if (usuario.getLogin() == null || usuario.getLogin().isEmpty()){
+            return false;//não dá para salvar
+        }
 
+        entityManager.getTransaction().begin();
+        entityManager.persist(usuario);
+        entityManager.getTransaction().commit();
+        return true;
+    }
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
+        
         //Cria um objeto da classe Usuario
         Usuario usuario = new Usuario();
         Pessoa pessoa = new Pessoa();
@@ -249,8 +261,17 @@ public class TelaCadastro extends javax.swing.JFrame {
         //Verifica se o login contém palavra proibida
         //Se a palavra usada para login não for proibida
         else if (resultado == false){
-            javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuarios.getPorLogin().get(usuario.getLogin()).getPessoa().getNomeCompleto() + "\nCpf: " + usuarios.getPorLogin().get(usuario.getLogin()).getPessoa().getCpf() + 
-                    "\nLogin: " + usuarios.getPorLogin().get(usuario.getLogin()).getLogin() + "\nSenha: " + usuarios.getPorLogin().get(usuario.getLogin()).getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            //Chamada da função salvar()
+            boolean salvar = salvar(usuario);
+            //Se salvar() retornar verdadeiro imprime a mensagem de sucesso
+            if (salvar){
+                javax.swing.JOptionPane.showMessageDialog(this, "Usuário: " + usuarios.getPorLogin().get(usuario.getLogin()).getPessoa().getNomeCompleto() + "\nCpf: " + usuarios.getPorLogin().get(usuario.getLogin()).getPessoa().getCpf() + 
+                        "\nLogin: " + usuarios.getPorLogin().get(usuario.getLogin()).getLogin() + "\nSenha: " + usuarios.getPorLogin().get(usuario.getLogin()).getSenha() + "\nCadastro realizado com sucesso!", "Sucesso!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+            //Se retornar falso imprime a mensagem de erro
+            else{
+                javax.swing.JOptionPane.showMessageDialog(this, "Login nulo ou vazio!", "Erro de cadastro!", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
         }
         //Se a palavra for proibida
         else{

@@ -14,7 +14,7 @@ import jakarta.persistence.Persistence;
  */
 public class JPAUtil {
     
-    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("gerenciamento_banco_de_dados_EcoCaatinga");//Criada uma única vez: é cara de construir
+    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("gerenciamento_banco_dados_ecocaatinga");//Criada uma única vez: é cara de construir
     
     public static EntityManager getEntityManager(){
         return FACTORY.createEntityManager();

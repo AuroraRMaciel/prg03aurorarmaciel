@@ -14,7 +14,7 @@
                                 useTimezone=true&amp;serverTimezone=UTC"/>
             <property name="jakarta.persistence.jdbc.user"
                                                     value= ""/>
-            <property name="jakarta.persistence.pdbc.password" 
+            <property name="jakarta.persistence.jdbc.password" 
                                                     value=""/>
             <property name="jakarta.persistence.jdbc.driver" 
                                                value="com.mysql.jdbc.Driver"/>
