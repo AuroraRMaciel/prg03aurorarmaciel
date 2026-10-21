@@ -4,6 +4,12 @@
  */
 package br.com.ifba.usuario.view;
 
+import br.com.ifba.infrastructure.util.JPAUtil;
+import br.com.ifba.usuario.entity.Usuario;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import java.util.List;
+
 /**
  *
  * @author auror
@@ -11,6 +17,10 @@ package br.com.ifba.usuario.view;
 public class TelaListagem extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaListagem.class.getName());
+    private Usuario usuarioEncontrado = new Usuario();
+    private String cpfProcurado;
+    //Chamada do garçom
+    private final static EntityManager entityManager = JPAUtil.getEntityManager();
 
     /**
      * Creates new form telaListagem
@@ -18,7 +28,25 @@ public class TelaListagem extends javax.swing.JFrame {
     public TelaListagem() {
         initComponents();
     }
-
+    public TelaListagem(String cpfProcurado) {
+        initComponents();
+        this.cpfProcurado = cpfProcurado;
+        
+        //Executa a busca
+        boolean encontrado = buscar(cpfProcurado);
+        
+        if (encontrado && this.usuarioEncontrado != null){
+            taListagem.setText("Nome: " + this.usuarioEncontrado.getNomeUsuario() +
+                    "\nCPF: " + this.usuarioEncontrado.getPessoa().getCpf() +
+                    "\nData de Nascimento: " + this.usuarioEncontrado.getPessoa().getDataNascimento() +
+                    "\nGênero: " + this.usuarioEncontrado.getPessoa().getGenero() +
+                    "\nTelefone: " + this.usuarioEncontrado.getTelefone() +
+                    "\nEmail: " + this.usuarioEncontrado.getEmail());
+        }
+        else{
+            taListagem.setText("Usuário não encontrado para o CPF: " + cpfProcurado);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,24 +106,27 @@ public class TelaListagem extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+    private boolean buscar(String cpf){
+        if (cpf == null || cpf.isEmpty()){
+            return false;
         }
-        //</editor-fold>
-
+        
+        entityManager.getTransaction().begin();
+        String jpql = "select u from Usuario as u where u.pessoa.cpf = :cpf";
+        TypedQuery<Usuario> query =  entityManager.createQuery(jpql, Usuario.class);
+        query.setParameter("cpf", cpf);
+        
+        List<Usuario> resultados = query.getResultList();
+        
+        if (resultados.isEmpty()){
+            this.usuarioEncontrado = null;
+            return false;
+        }
+        
+        this.usuarioEncontrado = resultados.get(0);
+        return true;
+    }
+    public static void main(String args[]) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new TelaListagem().setVisible(true));
     }

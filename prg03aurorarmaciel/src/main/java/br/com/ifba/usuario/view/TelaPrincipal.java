@@ -4,6 +4,10 @@
  */
 package br.com.ifba.usuario.view;
 
+import br.com.ifba.infrastructure.util.JPAUtil;
+import br.com.ifba.usuario.entity.Usuario;
+import jakarta.persistence.EntityManager;
+import java.util.List;
 import javax.swing.ImageIcon;
 
 /**
@@ -37,15 +41,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // 2. Limpa qualquer linha que já exista por segurança
         modelo.setRowCount(0);
     
-        // 3. Adiciona linhas com dados fictícios (Respeitando a ordem das colunas da imagem)
-        modelo.addRow(new Object[]{"Ana Silva", "123.456.789-00", "Feminino", "(74) 99999-1111", "ana@email.com", "", ""});
-        modelo.addRow(new Object[]{"João Santos", "987.654.321-11", "Masculino", "(74) 98888-2222", "joao@email.com", "", ""});
-        modelo.addRow(new Object[]{"Maria Oliveira", "456.789.123-22", "Feminino", "(74) 97777-3333", "maria@email.com", "", ""});
+        // 3. Adiciona dados reais do banco
+        EntityManager em = JPAUtil.getEntityManager();
+        List<Usuario> listaUsuarios = em.createQuery("select u from Usuario u", Usuario.class).getResultList();
         
         // Supondo que você tenha os ícones salvos no seu projeto (ex: na pasta src/main/resources/icons/)
         ImageIcon iconeLixeira = new ImageIcon(getClass().getResource("/br/com/ifba/usuario/image/deletar.png"));
         ImageIcon iconeEditar = new ImageIcon(getClass().getResource("/br/com/ifba/usuario/image/editar.png"));
 
+        for (Usuario u : listaUsuarios){
+            modelo.addRow(new Object[]{
+                u.getPessoa().getNomeCompleto(), u.getPessoa().getCpf(),
+                u.getPessoa().getGenero(), u.getTelefone(),
+                u.getEmail(), iconeLixeira, iconeEditar
+            });
+        }
+        
         // Atribuindo a lixeira (Coluna 5) informando a ação "EXCLUIR"
         new ButtonColumn(tblListar, 5, iconeLixeira, "EXCLUIR");
     
@@ -67,7 +78,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnAdicionar = new javax.swing.JButton();
         btnIniciar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtProcurar = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,9 +103,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnIniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/usuario/image/telaInicial.png"))); // NOI18N
         btnIniciar.setText("Homescreen");
 
-        jTextField1.setText("Procurar...");
+        txtProcurar.setText("Procurar...");
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/usuario/image/pesquisar.png"))); // NOI18N
+        btnPesquisar.addActionListener(this::btnPesquisarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,7 +116,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(btnPesquisar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(btnAdicionar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
@@ -117,7 +129,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnPesquisar)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProcurar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(btnIniciar)
                         .addComponent(btnAdicionar, javax.swing.GroupLayout.Alignment.TRAILING)))
@@ -155,6 +167,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        String cpfProcurado = new String(txtProcurar.getText().trim());
+        
+        TelaListagem telaListagem = new TelaListagem(cpfProcurado);//Cria uma tela do tipo listagem
+        telaListagem.setVisible(true);//Faz essa tela ficar visível
+        this.setVisible(false);//Fecha a tela principal
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -186,7 +206,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblListar;
+    private javax.swing.JTextField txtProcurar;
     // End of variables declaration//GEN-END:variables
 }
