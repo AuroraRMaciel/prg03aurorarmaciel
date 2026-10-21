@@ -118,6 +118,9 @@ public class TelaListagem extends javax.swing.JFrame {
         
         List<Usuario> resultados = query.getResultList();
         
+        //Fechando o recurso do garçom
+        entityManager.close();
+        
         if (resultados.isEmpty()){
             this.usuarioEncontrado = null;
             return false;
@@ -125,6 +128,7 @@ public class TelaListagem extends javax.swing.JFrame {
         
         this.usuarioEncontrado = resultados.get(0);
         return true;
+        
     }
     public static void main(String args[]) {
         /* Create and display the form */

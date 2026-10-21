@@ -1,6 +1,10 @@
 package br.com.ifba.usuario.view;
 
+import br.com.ifba.infrastructure.util.JPAUtil;
+import br.com.ifba.usuario.entity.Usuario;
 import br.com.ifba.usuario.view.TelaEdicao;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,6 +38,7 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
         @Override
         public void actionPerformed(ActionEvent e) {
             fireEditingStopped();
+            //Descobre qual linha da tabela foi clicada
             int linhaSelecionada = table.getSelectedRow();
                 
             if (linhaSelecionada != -1) {
@@ -41,8 +46,19 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
                 if (acao.equals("EDITAR")) {
                     // Lógica para abrir a tela de edição
                     String nomeUsuario = (String) table.getValueAt(linhaSelecionada, 0);
-                        
-                    TelaEdicao telaEditar = new TelaEdicao();
+                    //Pega o cpf que está na coluna 1 daquela linha
+                    String cpfSelecionado = (String) table.getValueAt(linhaSelecionada, 1);
+                    
+                    //Buscar o usuario no banco de dados
+                    //Chama um garçom
+                    EntityManager em = JPAUtil.getEntityManager();
+                    
+                    TypedQuery <Usuario> query = em.createQuery("select u from Usuario u where u.pessoa.cpf = :cpf", Usuario.class);
+                    query.setParameter("cpf", cpfSelecionado);
+                    
+                    Usuario usuarioParaEditar = query.getSingleResult();
+                    
+                    TelaEdicao telaEditar = new TelaEdicao(usuarioParaEditar);
                     telaEditar.setVisible(true);
                         
                 } else if (acao.equals("EXCLUIR")) {

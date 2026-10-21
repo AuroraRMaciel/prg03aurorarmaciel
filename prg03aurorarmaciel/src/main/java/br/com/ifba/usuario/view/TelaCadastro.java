@@ -210,6 +210,10 @@ public class TelaCadastro extends javax.swing.JFrame {
         entityManager.getTransaction().begin();
         entityManager.persist(usuario);
         entityManager.getTransaction().commit();
+        
+        //Fechando o recurso do garçom
+        entityManager.close();
+        
         return true;
     }
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
