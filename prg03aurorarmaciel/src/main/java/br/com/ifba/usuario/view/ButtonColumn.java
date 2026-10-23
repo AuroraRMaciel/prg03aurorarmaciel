@@ -8,6 +8,7 @@ import jakarta.persistence.TypedQuery;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.AbstractCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +23,35 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
     private String text;
     private ImageIcon icon;
     private String acao; // "EDITAR" ou "EXCLUIR"
+    private Usuario usuario = new Usuario();
+
+    
+    private boolean buscar(String cpf){
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        
+        if (cpf == null || cpf.isEmpty()){
+            return false;
+        }
+        
+        entityManager.getTransaction().begin();
+        String jpql = "select u from Usuario as u where u.pessoa.cpf = :cpf";
+        TypedQuery<Usuario> query =  entityManager.createQuery(jpql, Usuario.class);
+        query.setParameter("cpf", cpf);
+        
+        List<Usuario> resultados = query.getResultList();
+        
+        //Fechando o recurso do garçom
+        entityManager.close();
+        
+        if (resultados.isEmpty()){
+            this.usuario = null;
+            return false;
+        }
+        
+        this.usuario = resultados.get(0);
+        return true;
+        
+    }
 
     public ButtonColumn(JTable table, int column, ImageIcon icon, String acao) {
         this.icon = icon;
@@ -72,9 +102,32 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
                     );
                         
                     if (resposta == JOptionPane.YES_OPTION) {
-                        // Remove visualmente da tabela (ou apaga do banco de dados)
-                        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) table.getModel();
-                        model.removeRow(linhaSelecionada);
+                        // 1. Pega o ID dinamicamente da linha selecionada na tabela
+                        // (Substitua '0' pelo índice da coluna onde fica o ID na sua tabela)
+                        String cpfUsuario = (String) table.getValueAt(linhaSelecionada, 1);
+                        boolean resultado = buscar(cpfUsuario);
+                        
+                        //Apaga do banco de dados 
+                        //Abre a conexão
+                        if (resultado){
+                            EntityManager em = JPAUtil.getEntityManager();
+                        
+                            Usuario usuarioEncontrado = em.find(Usuario.class, usuario.getId());
+                        
+                            em.getTransaction().begin();
+                            em.remove(usuarioEncontrado);
+                            em.getTransaction().commit();
+                        
+                            //Fechando a conexão
+                            em.close();
+                        
+                            // Remove visualmente da tabela 
+                            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) table.getModel();
+                            model.removeRow(linhaSelecionada);
+                        }
+                        else{
+                            javax.swing.JOptionPane.showMessageDialog(table, "Usuario não encontrado!", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        }
                         }
                     }
                 }

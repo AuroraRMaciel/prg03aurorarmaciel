@@ -177,6 +177,7 @@ public class TelaEdicao extends javax.swing.JFrame {
         }
         
         //Alterando no banco de dados
+        
         entityManager.getTransaction().begin();
         entityManager.merge(usuarioParaEditar);
         entityManager.getTransaction().commit();
