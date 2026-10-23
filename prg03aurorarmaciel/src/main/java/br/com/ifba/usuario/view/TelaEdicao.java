@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package br.com.ifba.usuario.view;
-
+import br.com.ifba.infrastructure.util.JPAUtil;
+import br.com.ifba.usuario.entity.Usuario;
+import br.com.ifba.usuario.view.TelaListagem;
+import jakarta.persistence.EntityManager;
 /**
  *
  * @author auror
@@ -11,12 +14,19 @@ package br.com.ifba.usuario.view;
 public class TelaEdicao extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaEdicao.class.getName());
-
+    private Usuario usuarioParaEditar;
+    //Chamada do garçom
+    private final static EntityManager entityManager = JPAUtil.getEntityManager();
+    
     /**
      * Creates new form TelaEdicao
      */
     public TelaEdicao() {
         initComponents();
+    }
+    public TelaEdicao(Usuario usuarioParaEditar) {
+        initComponents();
+        this.usuarioParaEditar = usuarioParaEditar;
     }
 
     /**
@@ -58,9 +68,10 @@ public class TelaEdicao extends javax.swing.JFrame {
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(this::btnCancelarActionPerformed);
 
         jListCampo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Nome", "Cpf", "Gênero", "Telefone", "Email", "Login ", "Senha" };
+            String[] strings = { "Nome", "Cpf", "Gênero", "Telefone", "Email", "Login", "Senha" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -130,7 +141,58 @@ public class TelaEdicao extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
+        //Pega o campo e o novo valor do campo
+        String campo = jListCampo.getSelectedValue();//.toLowerCase();
+        String novoValor = txtConteudo.getText();
+        
+        //Verificações
+        if (novoValor == null || novoValor.isEmpty()){
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, preencha o campo com o novo valor do " + campo, "Erro novo valor vazio", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+        
+        //Alterando o usuario
+        if (campo.equals("Nome")){
+            usuarioParaEditar.getPessoa().setNomeCompleto(novoValor);
+        }
+        else if (campo.equals("Cpf")){
+            usuarioParaEditar.getPessoa().setCpf(novoValor);
+        }
+        else if (campo.equals("Gênero")){
+            usuarioParaEditar.getPessoa().setGenero(novoValor);
+        }
+        else if (campo.equals("Telefone")){
+            usuarioParaEditar.setTelefone(novoValor);
+        }
+        else if (campo.equals("Email")){
+            usuarioParaEditar.setEmail(novoValor);
+        }
+        else if (campo.equals("Login")){
+            usuarioParaEditar.setLogin(novoValor);
+        }
+        else if (campo.equals("Senha")){
+            usuarioParaEditar.setSenha(novoValor);
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, selecione um campo para edição.", "Erro campo não selecionado", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+        
+        //Alterando no banco de dados
+        entityManager.getTransaction().begin();
+        entityManager.merge(usuarioParaEditar);
+        entityManager.getTransaction().commit();
+        
+        //Fechando o recurso do garçom
+        entityManager.close();
+        
+        javax.swing.JOptionPane.showMessageDialog(this, campo + " editado(a) com sucesso!");
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        TelaPrincipal telaPrincipal = new TelaPrincipal();
+        telaPrincipal.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

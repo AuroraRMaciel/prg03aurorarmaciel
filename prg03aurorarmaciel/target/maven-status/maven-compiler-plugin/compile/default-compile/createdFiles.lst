@@ -8,6 +8,7 @@ br\com\ifba\login\view\TelaLogin.class
 br\com\ifba\status\model\StatusCadastro.class
 br\com\ifba\usuario\entity\Usuario.class
 br\com\ifba\perfil\entity\Perfil.class
+br\com\ifba\infrastructure\util\JPAUtil.class
 br\com\ifba\transportador\entity\Transportador.class
 br\com\ifba\pedido\entity\Pedido.class
 br\com\ifba\status\model\Status.class
