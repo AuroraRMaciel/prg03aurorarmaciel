@@ -12,13 +12,15 @@ import br.com.ifba.usuario.repository.RepositorioUsuarioEmMemoria;
 import br.com.ifba.usuario.validar.ValidadorUsuario;
 import br.com.ifba.infrastructure.util.JPAUtil;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import java.util.List;
 
 /**
  *
  * @author auror
  */
 public class TelaCadastro extends javax.swing.JFrame {
-    
+    private Usuario usuarioEncontrado = new Usuario();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCadastro.class.getName());
     //Chamada do garçom
     private final static EntityManager entityManager = JPAUtil.getEntityManager();
@@ -202,11 +204,40 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void txtGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGeneroActionPerformed
     // TODO add your handling code here:
     }//GEN-LAST:event_txtGeneroActionPerformed
+    private boolean buscar(String cpf){
+        if (cpf == null || cpf.isEmpty()){
+            return false;
+        }
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        
+        entityManager.getTransaction().begin();
+        String jpql = "select u from Usuario as u where u.pessoa.cpf = :cpf";
+        TypedQuery<Usuario> query =  entityManager.createQuery(jpql, Usuario.class);
+        query.setParameter("cpf", cpf);
+        
+        List<Usuario> resultados = query.getResultList();
+        
+        //Fechando o recurso do garçom
+        entityManager.close();
+        
+        if (resultados.isEmpty()){
+            this.usuarioEncontrado = null;
+            return false;
+        }
+        
+        this.usuarioEncontrado = resultados.get(0);
+        return true;
+        
+    }
     private boolean salvar(Usuario usuario){//Criação da função salvar()
         if (usuario.getLogin() == null || usuario.getLogin().isEmpty()){
             return false;//não dá para salvar
         }
-
+        if (buscar(usuario.getPessoa().getCpf())){
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao fazer o cadastro", "Erro ao cadastrar", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        
         entityManager.getTransaction().begin();
         entityManager.persist(usuario);
         entityManager.getTransaction().commit();
